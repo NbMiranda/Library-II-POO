@@ -1,0 +1,129 @@
+#orange-text, #arrowBtn ,a{
+    color: orange !important;
+    text-decoration:none !important;
+}
+a:hover {
+    
+    color: #b77905 !important;
+    transition: .6s;
+}
+#carousel-text {
+    font-size:  1.2em;
+    background-color: #00000061;
+    color: #ffffff;
+    -webkit-text-stroke-width: .8px;
+    -webkit-text-stroke-color: #000;
+}
+
+#navbar{
+    height: 80px;
+}
+
+#nav{
+    height: 5em;
+}
+
+body{
+    background-color:#141414 !important;
+    color: #fff !important;
+}
+
+#carouselExampleCaptions{
+   
+    height: 23em;
+}
+
+#img{
+    
+    height: 23em;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#content{
+    margin-top: 4em;
+}
+
+.intro{
+    font-size: 1.4em;
+    padding: 1.5em;
+    letter-spacing: 1.3px;
+}
+
+#carouselExampleIndicatorsHarry,#carouselExampleIndicatorsPearcy, #carouselExampleIndicatorsSking{
+    height: 35em ;
+    width: 23em ;
+}
+ul {
+    list-style-type: none;
+}
+
+#page-nav a{
+    border-bottom: 1px solid rgb(255, 255, 255);
+    color: #fff !important;
+}
+
+#book_success{
+    color: #21eb13;
+    border-radius: 10px;
+    font-weight: 400;
+    
+}
+
+#editModal, #deleteModal{
+    color: #000 !important;
+}
+
+form{
+    font-size: 1.3em !important;
+}
+
+#forms{
+    margin-top: 1em;
+    
+}
+
+.sqlResult{
+    padding: 0;
+    font-size: 1.2em;
+    margin: 1em 0 1em 0 !important;
+    
+}
+ #edit, #delete{
+    color: #000;
+ }
+
+#writerButton{
+    font-size: .8em !important;
+    /* padding: .3em;
+    border-radius: 6px;
+    background-color: #14141400;
+    border: 1px solid orange; */
+}
+
+#writerButton:hover:hover{
+    border-color: #b77905;
+    background-color: #ffffff00;
+}
+
+#arrowBtn:hover{
+    color: #b77905;
+    border-color: #b77905;
+    background-color: #ffffff00;
+    transition: .6s;
+}
+
+::-webkit-scrollbar-track{
+    background-color: #141414;
+}
+
+::-webkit-scrollbar{
+    width: 7px;
+    
+}
+
+::-webkit-scrollbar-thumb{
+    background: orange;
+    border-radius: 15px;
+}
