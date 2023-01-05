@@ -2,13 +2,15 @@
 //registering writers from writer table
 session_start();
 include('../database/connection.php');
-$conn =connect();
+// $conn =connect();
 
 $writerName = filter_input(INPUT_POST, 'writerName', FILTER_SANITIZE_STRING);
 
-$sql = $conn->prepare("INSERT INTO writers (writer_name) VALUES('$writerName');");
+// $sql = $conn->prepare("INSERT INTO writers (writer_name) VALUES('$writerName');");
 
-$sql->execute();
+// $sql->execute();
+$sql = new Connect();
+$sql->execute("INSERT INTO writers (writer_name) VALUES('$writerName');");
 
 if($sql){
     $_SESSION['msg'] = "<p id='book_success'>Escritor cadastrado com sucesso</p>";

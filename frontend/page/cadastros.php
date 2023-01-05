@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once '../../database/connection.php';
-$conn = connect();
+// $conn = connect();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,13 +28,21 @@ $conn = connect();
         unset($_SESSION['msg']);
     }
     //sql writers
-    $stmt = $conn->prepare("SELECT * FROM writers");
-    $stmt->execute(array());
-    $writersResult = $stmt->fetchAll();
+    // $stmt = $conn->prepare("SELECT * FROM writers");
+    // $stmt->execute(array());
+    // $writersResult = $stmt->fetchAll();
+
+    $writers = new Connect();
+    $writers->setQuery("SELECT * FROM writers");
+    $writersResult = $writers->getQuery();
     //sql books
-    $sql = $conn->prepare("SELECT * FROM books");
-    $sql->execute(array());
-    $result = $sql->fetchAll();
+    // $sql = $conn->prepare("SELECT * FROM books");
+    // $sql->execute(array());
+    // $result = $sql->fetchAll();
+
+    // $books = new Connect();
+    // $books->setQuery("SELECT * FROM books");
+    // $result = $books->getQuery();
     
     ?>
 
@@ -168,10 +176,15 @@ $conn = connect();
     $pg_qty = 10;
     $start = ($pg_qty * $page) - $pg_qty;
     //sql query and print result 
-    $sqlPage = $conn->prepare("SELECT b.id, b.book_name, b.genre, b.other_genre, b.sinopse, w.writer_name FROM books as b, writers as w WHERE w.id = b.writer_id ORDER BY book_name LIMIT $start, $pg_qty");
+    // $sqlPage = $conn->prepare("SELECT b.id, b.book_name, b.genre, b.other_genre, b.sinopse, w.writer_name FROM books as b, writers as w WHERE w.id = b.writer_id ORDER BY book_name LIMIT $start, $pg_qty");
 
-    $sqlPage->execute(array());
-    $resultJoin = $sqlPage->fetchAll();
+    // $sqlPage->execute(array());
+    // $resultJoin = $sqlPage->fetchAll();
+
+    $books = new Connect();
+    $books->setQuery("SELECT b.id, b.book_name, b.genre, b.other_genre, b.sinopse, w.writer_name FROM books as b, writers as w WHERE w.id = b.writer_id ORDER BY book_name LIMIT $start, $pg_qty");
+    $booksResult = $books->getQuery();
+
     echo "<div class='container text-center'>
             
             <div class='row' style='margin-top:2em;'>
@@ -186,7 +199,7 @@ $conn = connect();
         </div>";
     
     
-    foreach ($resultJoin as $key ) {
+    foreach ($booksResult as $key ) {
         $book_name = $key['book_name'];
         $writer_name = $key['writer_name'];
         $genre = $key['genre'];
@@ -216,7 +229,12 @@ $conn = connect();
     ?>
     <div class="container text-center" style="font-size: 1.4em;">
         <?php
-        $count = $conn->query("SELECT count(*) FROM books")->fetchColumn();
+        // $count = $conn->query("SELECT count(*) FROM books")->fetchColumn();
+        $pagination = new Connect();
+        // $count = $countQuery->fetchColumn("SELECT count(*) FROM books");
+        $pagination->setPagination("SELECT count(*) FROM books");
+        $count = $pagination->getPagination();
+        
         $i = 1;
         while ($count > 0) {
             if ($page_current == $i) {

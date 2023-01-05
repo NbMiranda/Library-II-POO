@@ -22,13 +22,10 @@ services:
     environment:
       - PMA_ARBITRARY=1
   app:
-    build: .
-    tty: true
-    
+    build: ./
     ports:
       - 8080:80
     volumes:
       - /home/nathan/teste:/var/www/html/
     links:
       - db
-      

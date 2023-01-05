@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once '../../database/connection.php';
-$conn = connect();
+// $conn = connect();
 include_once '../components/header.php';
 ?>
 <!DOCTYPE html>
@@ -59,11 +59,15 @@ include_once '../components/header.php';
                 $start = ($pg_qty * $page) - $pg_qty;
 
                 // sql select to limit the page
-                $stmt = $conn->prepare("SELECT * FROM writers LIMIT $start, $pg_qty");
-                $stmt->execute(array());
-                $result = $stmt->fetchAll();
+                // $stmt = $conn->prepare("SELECT * FROM writers LIMIT $start, $pg_qty");
+                // $stmt->execute(array());
+                // $result = $stmt->fetchAll();
 
-                foreach ($result as $row) {
+                $page = new Connect();
+                $page->setQuery("SELECT * FROM writers LIMIT $start, $pg_qty");
+                $limitQuery = $page->getQuery();
+
+                foreach ($limitQuery as $row) {
                     $writerName = $row['writer_name'];
                     $id = $row['id'];
                     echo "<p>$writerName</p>";
@@ -79,9 +83,13 @@ include_once '../components/header.php';
                             id="writerNameEdit" required>
                             <option value="">-- Escritor que quer editar --</option>
                             <?php
-                            $stmt = $conn->prepare("SELECT * FROM writers");
-                            $stmt->execute(array());
-                            $result = $stmt->fetchAll();
+                            // $stmt = $conn->prepare("SELECT * FROM writers");
+                            // $stmt->execute(array());
+                            // $result = $stmt->fetchAll();
+
+                            $writers = new Connect();
+                            $writers->setQuery("SELECT * FROM writers");
+                            $result = $writers->getQuery();
 
                             foreach ($result as $row) {
                                 $writerName = $row['writer_name'];
@@ -123,11 +131,11 @@ include_once '../components/header.php';
                                         id="writerNameDel" required>
                                         <option value="">-- Escritor que quer deletar --</option>
                                         <?php
-                                        $state = $conn->prepare("SELECT * FROM writers");
-                                        $state->execute(array());
-                                        $stateResult = $state->fetchAll();
+                                        // $state = $conn->prepare("SELECT * FROM writers");
+                                        // $state->execute(array());
+                                        // $stateResult = $state->fetchAll();
 
-                                        foreach ($stateResult as $rowState) {
+                                        foreach ($result as $rowState) {
                                             $writerName = $rowState['writer_name'];
                                             $idWriter = $rowState['id'];
 
@@ -155,7 +163,10 @@ include_once '../components/header.php';
             <div class="col-6">
                 <div style="font-size: 1.4em;">
                     <?php
-                    $count = $conn->query("SELECT count(*) FROM writers")->fetchColumn();
+                    $pagination = new Connect();
+                    $pagination->setPagination("SELECT count(*) FROM writers");
+                    $count = $pagination->getPagination();
+                    // $count = $conn->query("SELECT count(*) FROM writers")->fetchColumn();
                     $i = 1;
                     while ($count > 0) {
                         if ($page_current == $i) {

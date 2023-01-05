@@ -1,5 +1,8 @@
 # Librarty 
 
+chmod u+x entrypoint.sh
+
+chown 1000:1000 vendor
 
 ## Instalação do composer necessaria
 

@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once '../../database/connection.php';
-$conn = connect();
+// $conn = connect();
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,14 +21,23 @@ include_once('../components/header.php');
 //sql query
 $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
-$sql_edit = $conn->prepare("SELECT * FROM books WHERE id = '$id'");
-$sql_edit->execute(array());
-$row_sql = $sql_edit->fetchAll();;
+// $sql_edit = $conn->prepare("SELECT * FROM books WHERE id = '$id'");
+// $sql_edit->execute(array());
+// $row_sql = $sql_edit->fetchAll();
+
+$sql_edit = new Connect();
+$sql_edit->setQuery("SELECT * FROM books WHERE id = '$id'");
+$row_sql = $sql_edit->getQuery();
+
 
 //validation
-$validation = $conn->prepare("SELECT * FROM books ORDER BY id DESC LIMIT 1; ");
-$validation->execute(array());
-$row = $validation->fetchAll();
+// $validation = $conn->prepare("SELECT * FROM books ORDER BY id DESC LIMIT 1; ");
+// $validation->execute(array());
+// $row = $validation->fetchAll();
+
+$validation = new Connect();
+$validation->setQuery("SELECT * FROM books ORDER BY id DESC LIMIT 1; ");
+$row = $validation->getQuery();
 
 if ($id > $row[0][0]) {
     include_once("../components/error.php");
@@ -62,9 +71,13 @@ if ($id > $row[0][0]) {
                             id="writer-name">
                             <option value="">-- Escolha o escritor --</option>
                             <?php
-                            $option_result = $conn->prepare("SELECT * FROM writers");
-                            $option_result->execute(array());
-                            $row_option = $option_result->fetchAll();
+                            // $option_result = $conn->prepare("SELECT * FROM writers");
+                            // $option_result->execute(array());
+                            // $row_option = $option_result->fetchAll();
+
+                            $writers = new Connect();
+                            $writers->setQuery("SELECT * FROM writers");
+                            $row_option = $writers->getQuery();
 
                             $i = 0;
                             foreach ($row_option as $row) {
