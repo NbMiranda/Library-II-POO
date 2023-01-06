@@ -1,7 +1,6 @@
 <?php
 session_start();
 include_once '../../database/connection.php';
-// $conn = connect();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,23 +26,26 @@ include_once '../../database/connection.php';
         echo $_SESSION['msg'];
         unset($_SESSION['msg']);
     }
-    //sql writers
-    // $stmt = $conn->prepare("SELECT * FROM writers");
-    // $stmt->execute(array());
-    // $writersResult = $stmt->fetchAll();
+    //page limitation
+    $page_current = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT);
+    $page = (!empty($page_current)) ? $page_current : 1;
+    $pg_qty = 10;
+    $start = ($pg_qty * $page) - $pg_qty;
 
+    //page nav query
+    $pagination = new Connect();
+    $pagination->setPagination("SELECT count(*) FROM books");
+    $count = $pagination->getPagination();
+
+    //books table query
+    $books = new Connect();
+    $books->setQuery("SELECT b.id, b.book_name, b.genre, b.other_genre, b.sinopse, w.writer_name FROM books as b, writers as w WHERE w.id = b.writer_id ORDER BY book_name LIMIT $start, $pg_qty");
+    $booksResult = $books->getQuery();
+
+    //writers table query
     $writers = new Connect();
     $writers->setQuery("SELECT * FROM writers");
-    $writersResult = $writers->getQuery();
-    //sql books
-    // $sql = $conn->prepare("SELECT * FROM books");
-    // $sql->execute(array());
-    // $result = $sql->fetchAll();
-
-    // $books = new Connect();
-    // $books->setQuery("SELECT * FROM books");
-    // $result = $books->getQuery();
-    
+    $writersResult = $writers->getQuery();   
     ?>
 
     <!-- register form -->
@@ -56,7 +58,6 @@ include_once '../../database/connection.php';
                         <input type="text" class="form-control" name="book-name" id="book-name" required>
                     </div>
                 </div>
-
                 <div class="col-4" id="forms">
                     <div class="form-group">
                         <label for="writer-name">Nome do escritor</label>
@@ -75,13 +76,10 @@ include_once '../../database/connection.php';
                 </div>
                 <div class="col-2" >
                     <a href="writerForm?page=1" class="btn btn-outline-warning"
-                     id="writerButton" style="margin-top:3.1em;">Novo escritor</a>
-                    
+                     id="writerButton" style="margin-top:3.1em;">Novo escritor</a>    
                 </div>
-
             </div>
             <div class="row" id="orange-text">
-
                 <div class="col-6" id="forms">
                     <div class="form-group">
                         <label for="genre">Genero</label>
@@ -119,34 +117,21 @@ include_once '../../database/connection.php';
         </form>
     </div>
     <!-- end register form -->
-    <style>
+    <!-- <style>
         h2{
             align-items: center;
         }
-    </style>
+    </style> -->
     <!-- Collapse Search DB -->
     <div class="container ">
         <h2 id='orange-text' class="text-center" style='margin-top: 2em;'>Livros Cadastrados
         <button class="btn btn-outline-warning" id="arrowBtn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            <!-- ↴ --> <i class="bi bi-caret-down-fill"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+            <i class="bi bi-caret-down-fill"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
             <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
             </svg></i>
-
-            <style>
-                #arrowBtn:hover{
-                    color: #b77905;
-                    border-color: #b77905;
-                    background-color: #ffffff00;
-                    transition: .6s;
-                }
-                #arrowBtn{
-                    color: orange;
-                    
-                }
-            </style>
-
         </button>
         </h2>
+        <!-- Collapse search book -->
         <div class="row ">
             <div class="col-4"></div>
             <div class="col-4" style="padding: 0;">
@@ -158,46 +143,23 @@ include_once '../../database/connection.php';
                                 <input type="text" class="form-control" name="search" id="search" placeholder="Nome do Livro" style="margin-bottom: 1em;">
                             </form>
                             <ul class="resultado" style="padding:0;"></ul>
-                            
                         </div> 
                     </div>
                 </div>
             </div>
             <div class="col-4"></div>
         </div>
-    </div>
+        <!-- select books output -->
+    </div>   
     <?php
-    ?>
-    
-    <?php
-    // page limitation
-    $page_current = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT);
-    $page = (!empty($page_current)) ? $page_current : 1;
-    $pg_qty = 10;
-    $start = ($pg_qty * $page) - $pg_qty;
-    //sql query and print result 
-    // $sqlPage = $conn->prepare("SELECT b.id, b.book_name, b.genre, b.other_genre, b.sinopse, w.writer_name FROM books as b, writers as w WHERE w.id = b.writer_id ORDER BY book_name LIMIT $start, $pg_qty");
-
-    // $sqlPage->execute(array());
-    // $resultJoin = $sqlPage->fetchAll();
-
-    $books = new Connect();
-    $books->setQuery("SELECT b.id, b.book_name, b.genre, b.other_genre, b.sinopse, w.writer_name FROM books as b, writers as w WHERE w.id = b.writer_id ORDER BY book_name LIMIT $start, $pg_qty");
-    $booksResult = $books->getQuery();
-
     echo "<div class='container text-center'>
-            
             <div class='row' style='margin-top:2em;'>
-                
                 <div class='col-3'> <h3>Livro</h3></div>
                 <div class='col-3'> <h3>Autor</h3></div>
                 <div class='col-3'> <h3>Gênero</h3></div>
                 <div class='col-3'> <h3></h3></div>
-            </div>
-    
-    
-        </div>";
-    
+            </div>    
+        </div>";   
     
     foreach ($booksResult as $key ) {
         $book_name = $key['book_name'];
@@ -209,10 +171,8 @@ include_once '../../database/connection.php';
 
         echo "<div class='container text-center'>
             <div class='row'>
-                
                 <div class='sqlResult col-3'> <p>$book_name</p></div>
                 <div class='sqlResult col-3'> <p>$writer_name</p></div>
-                
                 <div class='sqlResult col-3'><p>$genre $other_genre</p></div>
                 <div class='sqlResult col-3 text-center'> 
                 <a href='editForm?id=$id' class='btn' role='button'>
@@ -222,19 +182,12 @@ include_once '../../database/connection.php';
               </svg></i></a>        
                 </div>
             </div>   
-        </div>";
-        
+        </div>"; 
     }
-    //pagination
     ?>
     <div class="container text-center" style="font-size: 1.4em;">
         <?php
-        // $count = $conn->query("SELECT count(*) FROM books")->fetchColumn();
-        $pagination = new Connect();
-        // $count = $countQuery->fetchColumn("SELECT count(*) FROM books");
-        $pagination->setPagination("SELECT count(*) FROM books");
-        $count = $pagination->getPagination();
-        
+        //creating page nav
         $i = 1;
         while ($count > 0) {
             if ($page_current == $i) {
@@ -250,7 +203,6 @@ include_once '../../database/connection.php';
         }
         ?>
     </div>
-
     <?php
     include '../components/footer.php';
     ?>

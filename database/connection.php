@@ -15,10 +15,6 @@ class Connect{
     protected $page;
 
     function __construct(){
-        $this->connectDatabase();
-    }
-
-    function connectDatabase(){
         try {
             $this->connection = new PDO("mysql:host=".HOST.";dbname=".DATABASE, USER, PASSWORD);
         } catch (PDOException $e) {
@@ -26,6 +22,15 @@ class Connect{
             die();
         }
     }
+
+    // function connectDatabase(){
+    //     try {
+    //         $this->connection = new PDO("mysql:host=".HOST.";dbname=".DATABASE, USER, PASSWORD);
+    //     } catch (PDOException $e) {
+    //         echo "Erro na Conexão com banco de dados". $e->getMessage();
+    //         die();
+    //     }
+    // }
     public function execute($sql){
         $conn = $this->connection;
         $sql = $conn->prepare($sql);

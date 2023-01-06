@@ -13,19 +13,27 @@ services:
       # - MYSQL_DATABASE:${MYSQL_DATABASE} 
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=app_dev   
+    networks:
+      - admin-network   
+      - php-network  
   admin:
     image: phpmyadmin/phpmyadmin:latest
-    links:
-      - db
     ports:
       - 9090:80
     environment:
       - PMA_ARBITRARY=1
+    networks:
+      - admin-network
   app:
     build: ./
     ports:
       - 8080:80
     volumes:
       - /home/nathan/teste:/var/www/html/
-    links:
-      - db
+    networks:
+      - php-network
+networks:
+    admin-network:
+        driver: bridge
+    php-network:
+        driver: bridge

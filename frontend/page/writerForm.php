@@ -1,12 +1,30 @@
 <?php
 session_start();
 include_once '../../database/connection.php';
-// $conn = connect();
 include_once '../components/header.php';
+
+//page limitation
+$page_current = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT);
+$page = (!empty($page_current)) ? $page_current : 1;
+$pg_qty = 8;
+$start = ($pg_qty * $page) - $pg_qty;
+
+$page = new Connect();
+$page->setQuery("SELECT * FROM writers LIMIT $start, $pg_qty");
+$limitQuery = $page->getQuery();
+
+//page nav query
+$pagination = new Connect();
+$pagination->setPagination("SELECT count(*) FROM writers");
+$count = $pagination->getPagination();
+
+//writer table query
+$writers = new Connect();
+$writers->setQuery("SELECT * FROM writers");
+$writersResult = $writers->getQuery();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -48,25 +66,11 @@ include_once '../components/header.php';
         </div>
     </div>
 
+<!-- select books output -->
     <div class="container">
         <div class="row">
             <div class="col-6 text-center" style="font-size: 1.2em;">
                 <?php
-                //page limitation
-                $page_current = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT);
-                $page = (!empty($page_current)) ? $page_current : 1;
-                $pg_qty = 8;
-                $start = ($pg_qty * $page) - $pg_qty;
-
-                // sql select to limit the page
-                // $stmt = $conn->prepare("SELECT * FROM writers LIMIT $start, $pg_qty");
-                // $stmt->execute(array());
-                // $result = $stmt->fetchAll();
-
-                $page = new Connect();
-                $page->setQuery("SELECT * FROM writers LIMIT $start, $pg_qty");
-                $limitQuery = $page->getQuery();
-
                 foreach ($limitQuery as $row) {
                     $writerName = $row['writer_name'];
                     $id = $row['id'];
@@ -83,15 +87,7 @@ include_once '../components/header.php';
                             id="writerNameEdit" required>
                             <option value="">-- Escritor que quer editar --</option>
                             <?php
-                            // $stmt = $conn->prepare("SELECT * FROM writers");
-                            // $stmt->execute(array());
-                            // $result = $stmt->fetchAll();
-
-                            $writers = new Connect();
-                            $writers->setQuery("SELECT * FROM writers");
-                            $result = $writers->getQuery();
-
-                            foreach ($result as $row) {
+                            foreach ($writersResult as $row) {
                                 $writerName = $row['writer_name'];
                                 $writer_id = $row['id'];
 
@@ -101,7 +97,6 @@ include_once '../components/header.php';
                         </select>
 
                         <div class="form-group" id="forms">
-
                             <label for="editWriter" id="forms">Novo Nome do Escritor</label>
                             <input type="text" class="form-control" name="editWriter" id="editWriter"
                                 required>
@@ -131,11 +126,7 @@ include_once '../components/header.php';
                                         id="writerNameDel" required>
                                         <option value="">-- Escritor que quer deletar --</option>
                                         <?php
-                                        // $state = $conn->prepare("SELECT * FROM writers");
-                                        // $state->execute(array());
-                                        // $stateResult = $state->fetchAll();
-
-                                        foreach ($result as $rowState) {
+                                        foreach ($writersResult as $rowState) {
                                             $writerName = $rowState['writer_name'];
                                             $idWriter = $rowState['id'];
 
@@ -163,18 +154,12 @@ include_once '../components/header.php';
             <div class="col-6">
                 <div style="font-size: 1.4em;">
                     <?php
-                    $pagination = new Connect();
-                    $pagination->setPagination("SELECT count(*) FROM writers");
-                    $count = $pagination->getPagination();
-                    // $count = $conn->query("SELECT count(*) FROM writers")->fetchColumn();
                     $i = 1;
                     while ($count > 0) {
                         if ($page_current == $i) {
                             echo "<span id='page-nav'><a href='writerForm?page=$i'>$i</a></span> ";
-                            
                         } else {
                             echo "<a href='writerForm?page=$i'>$i</a> ";
-                            
                         }
                         $count = $count - 8;
                         $i++;

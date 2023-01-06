@@ -2,8 +2,8 @@ FROM php:7.3-apache
 WORKDIR /var/www/html/
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
-RUN chmod u+x build/entrypoint.sh
-RUN chown 1000:1000 vendor
+# RUN chmod u+x build/entrypoint.sh
+# RUN chown 1000:1000 vendor
 
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 RUN docker-php-ext-install pdo pdo_mysql && docker-php-ext-enable pdo pdo_mysql

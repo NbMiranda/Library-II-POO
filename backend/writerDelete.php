@@ -2,13 +2,8 @@
 //deleting writers from writer table 
 session_start();
 include('../database/connection.php');
-// $conn =connect();
 
 $writerNameDel = filter_input(INPUT_POST, 'writerNameDel', FILTER_SANITIZE_NUMBER_INT);
-
-// $sqlCheck = $conn->prepare("SELECT * FROM books WHERE writer_id = $writerNameDel");
-// $sqlCheck->execute(array());
-// $resultCheck = $sqlCheck->fetchAll();
 
 $sqlCheck = new Connect();
 $sqlCheck->setQuery("SELECT * FROM books WHERE writer_id = $writerNameDel");
@@ -22,8 +17,6 @@ if ($resultCheck[0]['writer_id'] == $writerNameDel ) {
      <i><b><a href='/frontend/page/editForm?id=$id' style='text-decoration: underline !important;'>$livro</a></b></i></p>";
    header("Location: ../frontend/page/cadastros?page=1");
 }else {
-   // $sql = $conn->prepare("DELETE FROM writers WHERE id='$writerNameDel'");
-   // $sql = new Connect();
    $sqlCheck->execute("DELETE FROM writers WHERE id='$writerNameDel'");
 
    if($sqlCheck){

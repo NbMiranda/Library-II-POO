@@ -2,13 +2,9 @@
 //registering writers from writer table
 session_start();
 include('../database/connection.php');
-// $conn =connect();
 
 $writerName = filter_input(INPUT_POST, 'writerName', FILTER_SANITIZE_STRING);
 
-// $sql = $conn->prepare("INSERT INTO writers (writer_name) VALUES('$writerName');");
-
-// $sql->execute();
 $sql = new Connect();
 $sql->execute("INSERT INTO writers (writer_name) VALUES('$writerName');");
 
