@@ -1,27 +1,36 @@
 <?php
 session_start();
-include_once '../../database/connection.php';
+
 include_once '../components/header.php';
+// require_once(realpath(dirname(__FILE__) . '../components/header.php'));
 
 //page limitation
-$page_current = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT);
-$page = (!empty($page_current)) ? $page_current : 1;
-$pg_qty = 8;
-$start = ($pg_qty * $page) - $pg_qty;
+// $page_current = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT);
+// $page = (!empty($page_current)) ? $page_current : 1;
+// $pg_qty = 8;
+// $start = ($pg_qty * $page) - $pg_qty;
 
-$page = new Connect();
-$page->setQuery("SELECT * FROM writers LIMIT $start, $pg_qty");
-$limitQuery = $page->getQuery();
+// $page = new Connect();
+// $page->setQuery("SELECT * FROM writers LIMIT $start, $pg_qty");
+// $limitQuery = $page->getQuery();
 
-//page nav query
-$pagination = new Connect();
-$pagination->setPagination("SELECT count(*) FROM writers");
-$count = $pagination->getPagination();
+// //page nav query
+// $pagination = new Connect();
+// $pagination->setPagination("SELECT count(*) FROM writers");
+// $count = $pagination->getPagination();
 
-//writer table query
-$writers = new Connect();
-$writers->setQuery("SELECT * FROM writers");
-$writersResult = $writers->getQuery();
+// //writer table query
+// $writers = new Connect();
+// $writers->setQuery("SELECT * FROM writers");
+// $writersResult = $writers->getQuery();
+include_once '../../database/connection.php';
+include_once "../../backend/Writers.php";
+include_once "../../backend/WritersQuery.php";
+$writers = new Writers();
+$writersQuery = new WritersQuery();
+// $writersQuery->pagination();
+$writersQuery->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT));
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,10 +45,10 @@ $writersResult = $writers->getQuery();
 </head>
 
 <body>
-    <!-- register writer Form -->
+    <!-- writer register writer Form -->
     <div class="container" id="orange-text">
         <h1 class="text-center" style="margin:1.5em;">Escritores</h1>
-        <form action="../../backend/writerRegister.php" method="post">
+        <form action="../../backend/WritersController.php" method="post">
             <div class="form-group" id="forms">
                 <?php
                 if (isset($_SESSION['msg'])) {
@@ -51,7 +60,7 @@ $writersResult = $writers->getQuery();
                 <label for="writerName" id="forms" style="color:#fff;">Nome do Escritor</label>
                 <input type="text" class="form-control" name="writerName" id="writerName" required>
             </div>
-            <button type="submit" class="btn btn-light" style="margin-top:1em;">Cadastrar</button>
+            <button type="submit" class="btn btn-light" name="register" style="margin-top:1em;">Cadastrar</button>
         </form>
     </div>
 
@@ -66,14 +75,14 @@ $writersResult = $writers->getQuery();
         </div>
     </div>
 
-<!-- select books output -->
+<!-- select writers output -->
     <div class="container">
         <div class="row">
             <div class="col-6 text-center" style="font-size: 1.2em;">
                 <?php
-                foreach ($limitQuery as $row) {
-                    $writerName = $row['writer_name'];
-                    $id = $row['id'];
+                foreach ($writersQuery->readLimit() as $row) {
+                    $writerName = $row->getWriterName();
+                    $id = $row->getId();
                     echo "<p>$writerName</p>";
                 }
                 ?>
@@ -81,15 +90,15 @@ $writersResult = $writers->getQuery();
             <!-- writer edit form -->
             <div class="col-6">
                 <div class="form-group">
-                    <form action="../../backend/writerEdit.php" method="post">
+                    <form action="../../backend/WritersController.php" method="post">
                         <label for="writerNameEdit">Nome do escritor</label>
-                        <select class="form-select" aria-label="Default select example" name="writerNameEdit"
-                            id="writerNameEdit" required>
+                        <select class="form-select" aria-label="Default select example" name="writerEditId"
+                            id="writerEditId" required>
                             <option value="">-- Escritor que quer editar --</option>
                             <?php
-                            foreach ($writersResult as $row) {
-                                $writerName = $row['writer_name'];
-                                $writer_id = $row['id'];
+                            foreach ($writersQuery->read() as $row) {
+                                $writerName = $row->getWriterName();
+                                $writer_id = $row->getId();
 
                                 echo "<option value='$writer_id'>$writerName</option>";
                             }
@@ -101,12 +110,12 @@ $writersResult = $writers->getQuery();
                             <input type="text" class="form-control" name="editWriter" id="editWriter"
                                 required>
                         </div>
-                        <button type="submit" class="btn btn-primary" style="margin-top:1em;">Editar</button>
+                        <button type="submit" class="btn btn-primary" name="edit" style="margin-top:1em;">Editar</button>
                     </form>
                     <!-- Delete writer form -->
-                    <form action="../../backend/writerDelete.php" method="post" style="color: black; margin-top:1em;">
+                    <form action="../../backend/WritersController.php" method="post" style="color: black; margin-top:1em;">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        <button type="button" name="delete" class="btn btn-danger" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">
                             Deletar
                         </button>
@@ -126,9 +135,9 @@ $writersResult = $writers->getQuery();
                                         id="writerNameDel" required>
                                         <option value="">-- Escritor que quer deletar --</option>
                                         <?php
-                                        foreach ($writersResult as $rowState) {
-                                            $writerName = $rowState['writer_name'];
-                                            $idWriter = $rowState['id'];
+                                        foreach ($writersQuery->read() as $row) {
+                                            $writerName = $row->getWriterName();
+                                            $idWriter = $row->getId();
 
                                             echo "<option value='$idWriter'>$writerName</option>";
                                         }
@@ -138,7 +147,7 @@ $writersResult = $writers->getQuery();
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-danger">Deletar</button>
+                                        <button type="submit" name="delete" class="btn btn-danger">Deletar</button>
                                     </div>
                                 </div>
                             </div>
@@ -155,8 +164,9 @@ $writersResult = $writers->getQuery();
                 <div style="font-size: 1.4em;">
                     <?php
                     $i = 1;
+                    $count = $writersQuery->count();
                     while ($count > 0) {
-                        if ($page_current == $i) {
+                        if ($writersQuery->getPage() == $i) {
                             echo "<span id='page-nav'><a href='writerForm?page=$i'>$i</a></span> ";
                         } else {
                             echo "<a href='writerForm?page=$i'>$i</a> ";
@@ -164,7 +174,7 @@ $writersResult = $writers->getQuery();
                         $count = $count - 8;
                         $i++;
                     }
-                    if ($page_current >= $i) {
+                    if ($writersQuery->getPage() >= $i) {
                         include_once '../components/error.php';
                     }
                     ?>

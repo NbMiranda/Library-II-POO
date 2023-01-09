@@ -11,17 +11,17 @@ define('DATABASE', $_ENV['DB_DATABASE']);
 
 class Connect{
     private $query;
-    protected $connection;
+    public static $connection;
     protected $page;
 
-    function __construct(){
-        try {
-            $this->connection = new PDO("mysql:host=".HOST.";dbname=".DATABASE, USER, PASSWORD);
-        } catch (PDOException $e) {
-            echo "Erro na Conexão com banco de dados". $e->getMessage();
-            die();
-        }
-    }
+    // function __construct(){
+    //     try {
+    //         $this->connection = new PDO("mysql:host=".HOST.";dbname=".DATABASE, USER, PASSWORD);
+    //     } catch (PDOException $e) {
+    //         echo "Erro na Conexão com banco de dados". $e->getMessage();
+    //         die();
+    //     }
+    // }
 
     // function connectDatabase(){
     //     try {
@@ -31,6 +31,14 @@ class Connect{
     //         die();
     //     }
     // }
+    public static function getConnection(){
+        if (!isset(self::$connection)) {
+            self::$connection = new PDO("mysql:host=".HOST.";dbname=".DATABASE, USER, PASSWORD);
+            self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            self::$connection->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING);
+        }
+        return self::$connection;
+    }
     public function execute($sql){
         $conn = $this->connection;
         $sql = $conn->prepare($sql);
