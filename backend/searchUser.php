@@ -4,9 +4,9 @@ include('../database/connection.php');
 
 $searchBook = filter_input(INPUT_POST, 'palavra', FILTER_SANITIZE_STRING);
 
-$sqlSearch = new Connect();
-$sqlSearch->setQuery("SELECT * FROM books WHERE book_name like '%$searchBook%'");
-$resultSearch = $sqlSearch->getQuery();
+$sqlSearch = Connect::getConnection()->prepare("SELECT * FROM books WHERE book_name like '%$searchBook%'");
+$sqlSearch->execute(array());
+$resultSearch = $sqlSearch->fetchAll();
 
 if (($resultSearch)) {
     foreach ($resultSearch as $key) {

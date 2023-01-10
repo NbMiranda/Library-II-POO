@@ -1,6 +1,10 @@
 <?php
 session_start();
 include_once '../../database/connection.php';
+include_once '../../backend/models/Books.php';
+include_once '../../backend/BooksQuery.php';
+include_once '../../backend/models/Writers.php';
+include_once '../../backend/WritersQuery.php';
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,38 +19,25 @@ include_once '../../database/connection.php';
 </head>
 <?php
 include_once('../components/header.php');
-//books query
-$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
-$sqlBooks = new Connect();
-$sqlBooks->setQuery("SELECT * FROM books WHERE id = '$id'");
-$booksResult = $sqlBooks->getQuery();
-
-//Writers query
-$sqlWriters = new Connect();
-$sqlWriters->setQuery("SELECT * FROM writers");
-$writersResult = $sqlWriters->getQuery();
-
-//validation
-$validation = new Connect();
-$validation->setQuery("SELECT * FROM books ORDER BY id DESC LIMIT 1; ");
-$row = $validation->getQuery();
-
-if ($id > $row[0][0]) {
-    include_once("../components/error.php");
-} else {
-
-}
+$books = new Books();
+$booksQuery = new BooksQuery();
+$writers = new Writers();
+$writersQuery = new WritersQuery();
+$booksQuery->setInputPost(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
 ?>
 <body>
     <!-- Edit form -->
     <div class="container">
         <h1 class="text-center" id="orange-text" style="margin:1.4em;">Edite o livro</h1>
         <h2 class='text-center'><i>
-                <?php echo ($booksResult[0]['book_name']) ?>
+                <?php
+                $booksResult = $booksQuery->readOne();
+                echo $booksResult[0]['book_name'];
+                ?>
             </i> </h2>
-        <form action="../../backend/edit.php" method="post">
-            <input type="hidden" name="id" value="<?php echo $booksResult[0]['id'] ?>">
+        <form action="../../backend/controllers/BooksController.php" method="post">
+            <input type="hidden" name="bookEditId" value="<?php echo $booksResult[0]['id'] ?>">
             <div class="row" id="orange-text">
 
                 <div class="col-6" id="forms">
@@ -59,21 +50,19 @@ if ($id > $row[0][0]) {
                 <div class="col-4" id="forms">
                     <div class="form-group">
                         <label for="writer-name">Nome do escritor</label>
-                        <select class="form-select" aria-label="Default select example" name="writer-name" required
+                        <select class="form-select" aria-label="Default select example" name="writerId" required
                             id="writer-name">
                             <option value="">-- Escolha o escritor --</option>
                             <?php
-                            $i = 0;
 
-                            foreach ($writersResult as $row) {
-                                $writerName = $writersResult[$i][1];
-                                $writer_id = $writersResult[$i][0];
+                            foreach ($writersQuery->read() as $row) {
+                                $writerName = $row->getWriterName();
+                                $writer_id = $row->getId();
                                 if ($booksResult[0]['writer_id'] === $writer_id) {
                                     echo "<option value='$writer_id' selected>$writerName</option>";
                                 }else {
                                     echo "<option value='$writer_id'>$writerName</option>";
                                 }
-                                $i++;
                             }
                             ?>
                         </select>
@@ -91,18 +80,14 @@ if ($id > $row[0][0]) {
                         <label for="">Genero</label>
                         <select class="form-select" aria-label="Default select example" name="genre" required>
                             <option value="">-- Escolha o Gênero --</option>
-                            <?php 
-                            $array = array('Acao e aventura', 'Biografia', 'Drama', 'Ficcao', 'Terror', 'Humor', 'Infantil', 'Romance',);
-                            $i = 0;
-                            foreach ($array as $row) {
-                                $genre = $array[$i];
-        
+                            <?php
+                            foreach ($books->genres() as $row) {
+                                $genre = $row;
                                 if ($booksResult[0]['genre'] === $genre) {
                                     echo "<option value='$genre' selected>$genre</option>";
                                 }else {
                                     echo "<option value='$genre'>$genre</option>";
                                 }
-                                $i++;
                             }
                             ?>
                         </select>
@@ -123,10 +108,10 @@ if ($id > $row[0][0]) {
                         rows="6"><?php echo $booksResult[0]['sinopse'] ?></textarea>
                 </div>
             </div>
-            <!-- edit modal -->
+            <!-- edit -->
             <div class="row text-center" style="margin: 1.5em;">
                 <div class="col-12">
-                    <button type="submit" class="btn btn-primary">Editar</button>
+                    <button type="submit" name="edit" class="btn btn-primary">Editar</button>
                 </div>
             </div>
         </form>
@@ -135,8 +120,8 @@ if ($id > $row[0][0]) {
     <div class="container text-center">
         <div class="row">
             <div class="col-12">
-                <form action="../../backend/delete.php" method="post">
-                <input type="hidden" name="id" value="<?php echo $booksResult[0]['id'] ?>">
+                <form action="../../backend/controllers/BooksController.php" method="post">
+                <input type="hidden" name="writerId" value="<?php echo $booksResult[0]['id'] ?>">
                     <!-- Button Modal -->
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">
                         Deletar
@@ -158,7 +143,7 @@ if ($id > $row[0][0]) {
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Fechar</button>
-                                    <button type="submit" class="btn btn-danger">Deletar</button>
+                                    <button type="submit" name="delete" class="btn btn-danger">Deletar</button>
                                 </div>
                             </div>
                         </div>

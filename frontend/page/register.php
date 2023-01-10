@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Register</title>
     <link rel="stylesheet" href="/assets/app.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
@@ -13,17 +13,15 @@
 <body>
     <?php include_once "../components/header.php"; ?>
     <div class="container">
-        <div class="row" id="login">
+        <div class="row" id="register">
             <div class="col-12 text-center" style="height: 0px; margin-top:1em;"><img class="mb-4" src="/assets/imgs/library.png" alt="" width="83" height="79"></div>
             <div class="col-12">
-                <form class="form-signin" id="loginForm">
-                    <h1 class="h3 mb-3 font-weight-normal text-center" style="margin-top:2.5em;">Login</h1>
+                <form class="form-signin" id="registerForm">
+                    <h1 class="h3 mb-3 font-weight-normal text-center" style="margin-top:2.5em;">Register</h1>
                     <label for="inputEmail" class="sr-only" style="margin-top:2em;">Email address</label>
                     <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                     <label for="inputPassword" class="sr-only" style="margin-top:1.3em;">Password</label>
                     <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                    <!-- <h3 style="margin-top:1em; font-size:.8em;"><a href="">Não é membro? se registre agora!</a></h3> -->
-                    <p style="margin-top:1em; font-size:.9em;"><a href="/frontend/page/register">Não é membro? se registre agora!</a></p>
                     <button class="btn btn-lg btn-primary btn-block" style="margin-top: 1em;" type="submit">Sign in</button>
                     <p class="mt-5 mb-3 text-muted text-center">&copy; Copyright 2023 | VirtualLibrary</p>
                 </form>
@@ -32,7 +30,7 @@
 
     </div>
     <style>
-        #login {
+        #register {
             border: 3px solid orange;
             width: 70%;
             margin-left: 15%;
@@ -41,7 +39,7 @@
             justify-content: center;
 
         }
-        #loginForm {
+        #registerForm {
             width: 30em !important;
             margin: auto;
             /* margin-left: 6%; */

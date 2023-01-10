@@ -3,7 +3,7 @@ session_start();
 include_once '../components/header.php';
 
 include_once '../../database/connection.php';
-include_once "../../backend/Writers.php";
+include_once "../../backend/models/Writers.php";
 include_once "../../backend/WritersQuery.php";
 
 $writers = new Writers();
@@ -27,7 +27,7 @@ $writersQuery->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_IN
     <!-- writer register writer Form -->
     <div class="container" id="orange-text">
         <h1 class="text-center" style="margin:1.5em;">Escritores</h1>
-        <form action="../../backend/WritersController.php" method="post">
+        <form action="../../backend/controllers/WritersController.php" method="post">
             <div class="form-group" id="forms">
                 <?php
                 if (isset($_SESSION['msg'])) {
@@ -69,7 +69,7 @@ $writersQuery->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_IN
             <!-- writer edit form -->
             <div class="col-6">
                 <div class="form-group">
-                    <form action="../../backend/WritersController.php" method="post">
+                    <form action="../../backend/controllers/WritersController.php" method="post">
                         <label for="writerNameEdit">Nome do escritor</label>
                         <select class="form-select" aria-label="Default select example" name="writerEditId"
                             id="writerEditId" required>
@@ -92,7 +92,7 @@ $writersQuery->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_IN
                         <button type="submit" class="btn btn-primary" name="edit" style="margin-top:1em;">Editar</button>
                     </form>
                     <!-- Delete writer form -->
-                    <form action="../../backend/WritersController.php" method="post" style="color: black; margin-top:1em;">
+                    <form action="../../backend/controllers/WritersController.php" method="post" style="color: black; margin-top:1em;">
                         <!-- Button trigger modal -->
                         <button type="button" name="delete" class="btn btn-danger" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">

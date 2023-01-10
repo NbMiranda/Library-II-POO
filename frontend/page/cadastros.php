@@ -1,6 +1,18 @@
 <?php
 session_start();
 include_once '../../database/connection.php';
+include '../components/header.php';
+include_once "../../backend/models/Books.php";
+include_once "../../backend/BooksQuery.php";
+include_once "../../backend/WritersQuery.php";
+include_once "../../backend/models/Writers.php";
+
+$books = new Books();
+$booksQuery = new BooksQuery();
+$writers = new Writers();
+$writersQuery = new WritersQuery();
+$booksQuery->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT));
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,9 +27,6 @@ include_once '../../database/connection.php';
 </head>
 
 <body>
-    <?php
-    include '../components/header.php';
-    ?>
     <div class="text-center" id='orange-text'>
         <h1 style="margin-top: 2em;">Cadastre seu Livro</h1>
     </div>
@@ -25,49 +34,29 @@ include_once '../../database/connection.php';
     if (isset($_SESSION['msg'])) {
         echo $_SESSION['msg'];
         unset($_SESSION['msg']);
-    }
-    //page limitation
-    $page_current = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT);
-    $page = (!empty($page_current)) ? $page_current : 1;
-    $pg_qty = 10;
-    $start = ($pg_qty * $page) - $pg_qty;
-
-    //page nav query
-    $pagination = new Connect();
-    $pagination->setPagination("SELECT count(*) FROM books");
-    $count = $pagination->getPagination();
-
-    //books table query
-    $books = new Connect();
-    $books->setQuery("SELECT b.id, b.book_name, b.genre, b.other_genre, b.sinopse, w.writer_name FROM books as b, writers as w WHERE w.id = b.writer_id ORDER BY book_name LIMIT $start, $pg_qty");
-    $booksResult = $books->getQuery();
-
-    //writers table query
-    $writers = new Connect();
-    $writers->setQuery("SELECT * FROM writers");
-    $writersResult = $writers->getQuery();   
+    }   
     ?>
 
     <!-- register form -->
     <div class="container">
-        <form action="../../backend/register.php" method="post">
+        <form action="../../backend/controllers/BooksController.php" method="post">
             <div class="row" id="orange-text">
                 <div class="col-6" id="forms">
                     <div class="form-group">
                         <label for="book-name">Nome do Livro</label>
-                        <input type="text" class="form-control" name="book-name" id="book-name" required>
+                        <input type="text" class="form-control" name="bookName" id="book-name" required>
                     </div>
                 </div>
                 <div class="col-4" id="forms">
                     <div class="form-group">
                         <label for="writer-name">Nome do escritor</label>
-                        <select class="form-select" aria-label="Default select example" name="writer-name" required
-                            id="writer-name">
+                        <select class="form-select" aria-label="Default select example" name="writerId" required
+                            id="writerId">
                             <option value="">-- Escolha o escritor --</option>
                             <?php
-                            foreach ($writersResult as $row) {
-                                $writerName = $row['writer_name'];
-                                $writer_id = $row['id'];
+                            foreach ($writersQuery->read() as $row) {
+                                $writerName = $row->getWriterName();
+                                $writer_id = $row->getId();
                                 echo "<option value='$writer_id'>$writerName</option>";
                             }
                             ?>
@@ -85,14 +74,10 @@ include_once '../../database/connection.php';
                         <label for="genre">Genero</label>
                         <select class="form-select " aria-label="Default select example" name="genre" id="genre" required>
                             <option value="">-- Escolha o Gênero --</option>
-                            <?php
-                            $array = array('Acao e aventura', 'Biografia', 'Drama', 'Ficcao', 'Terror', 'Humor', 'Infantil', 'Romance',);
-                            $i = 0;
-                        
-                            foreach ($array as $rows) {
-                                $genre = $array[$i];
+                            <?php                       
+                            foreach ($books->genres() as $row) {
+                                $genre = $row;
                                 echo "<option value='$genre'>$genre</option>";
-                                $i++;
                             }
                             ?>
                         </select>
@@ -100,9 +85,9 @@ include_once '../../database/connection.php';
                 </div>
                 <div class="col-6" id="forms">
                     <div class="form-group">
-                        <label for="other-genres">Gêneros secundarios</label>
+                        <label for="otherGenre">Gêneros secundarios</label>
                         <input type="text" minlength="2" maxlength="50" class="form-control" 
-                            name="other-genres" id="other-genres">
+                            name="otherGenre" id="other-genres">
                     </div>
                 </div>
             </div>
@@ -113,15 +98,11 @@ include_once '../../database/connection.php';
                      rows="6"></textarea>
                 </div>
             </div>
-            <button type="submit" class="btn btn-light" id="forms">Cadastrar</button>
+            <button type="submit" name="register" class="btn btn-light" id="forms">Cadastrar</button>
         </form>
     </div>
     <!-- end register form -->
-    <!-- <style>
-        h2{
-            align-items: center;
-        }
-    </style> -->
+
     <!-- Collapse Search DB -->
     <div class="container ">
         <h2 id='orange-text' class="text-center" style='margin-top: 2em;'>Livros Cadastrados
@@ -161,15 +142,15 @@ include_once '../../database/connection.php';
             </div>    
         </div>";   
     
-    foreach ($booksResult as $key ) {
-        $book_name = $key['book_name'];
-        $writer_name = $key['writer_name'];
-        $genre = $key['genre'];
-        $other_genre = $key['other_genre'];
-        $sinopse = $key['sinopse'];
-        $id = $key['id'];
+    foreach ($booksQuery->readLimit() as $key ) {
+        $book_name = $key->getBookName();
+        $writer_name = $key->getWriterName();
+        $genre = $key->getGenre();
+        $other_genre = $key->getOtherGenre();
+        $id = $key->getId();
 
-        echo "<div class='container text-center'>
+        echo "
+        <div class='container text-center'>
             <div class='row'>
                 <div class='sqlResult col-3'> <p>$book_name</p></div>
                 <div class='sqlResult col-3'> <p>$writer_name</p></div>
@@ -187,20 +168,7 @@ include_once '../../database/connection.php';
     ?>
     <div class="container text-center" style="font-size: 1.4em;">
         <?php
-        //creating page nav
-        $i = 1;
-        while ($count > 0) {
-            if ($page_current == $i) {
-                echo "<span id='page-nav'><a href='cadastros?page=$i'>$i</a></span> ";        
-            } else {
-                echo "<a href='cadastros?page=$i'>$i</a> ";    
-            }
-            $count = $count - 10;
-            $i++;
-        }
-        if ($page_current >= $i) {
-            include_once '../components/error.php';
-        }
+        $booksQuery->pageNav();
         ?>
     </div>
     <?php
