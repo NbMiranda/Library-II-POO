@@ -13,7 +13,23 @@ class WritersQuery {
         $page = (!empty($this->getPage())) ? $this->getPage() : 1;
         $pg_qty = 8;
         $start = ($pg_qty * $page) - $pg_qty;
-        return $start;
+        return $start; 
+    }
+    public function pageNav(){
+        $i = 1;
+        $count = $this->count();
+        while ($count > 0) {
+            if ($this->getPage() == $i) {
+                echo "<span id='page-nav'><a href='writerForm?page=$i'>$i</a></span> ";
+            } else {
+                echo "<a href='writerForm?page=$i'>$i</a> ";
+            }
+            $count = $count - 8;
+            $i++;
+        }
+        if ($this->getPage() >= $i) {
+            include_once '../components/error.php';
+        }
     }
     public function create(Writers $writers){
         try {
@@ -32,7 +48,6 @@ class WritersQuery {
         try {
             $sql = "SELECT * FROM writers order by Writer_name asc ";
             $result = Connect::getConnection()->query($sql);
-            // $result->bindValue(":num", $this->pagination());
             $lista = $result->fetchAll(PDO::FETCH_ASSOC);
             $writersResult = array();
             foreach ($lista as $key) {

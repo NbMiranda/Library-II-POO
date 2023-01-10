@@ -1,36 +1,15 @@
 <?php
 session_start();
-
 include_once '../components/header.php';
-// require_once(realpath(dirname(__FILE__) . '../components/header.php'));
 
-//page limitation
-// $page_current = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT);
-// $page = (!empty($page_current)) ? $page_current : 1;
-// $pg_qty = 8;
-// $start = ($pg_qty * $page) - $pg_qty;
-
-// $page = new Connect();
-// $page->setQuery("SELECT * FROM writers LIMIT $start, $pg_qty");
-// $limitQuery = $page->getQuery();
-
-// //page nav query
-// $pagination = new Connect();
-// $pagination->setPagination("SELECT count(*) FROM writers");
-// $count = $pagination->getPagination();
-
-// //writer table query
-// $writers = new Connect();
-// $writers->setQuery("SELECT * FROM writers");
-// $writersResult = $writers->getQuery();
 include_once '../../database/connection.php';
 include_once "../../backend/Writers.php";
 include_once "../../backend/WritersQuery.php";
+
 $writers = new Writers();
 $writersQuery = new WritersQuery();
-// $writersQuery->pagination();
-$writersQuery->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT));
 
+$writersQuery->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -163,30 +142,15 @@ $writersQuery->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_IN
             <div class="col-6">
                 <div style="font-size: 1.4em;">
                     <?php
-                    $i = 1;
-                    $count = $writersQuery->count();
-                    while ($count > 0) {
-                        if ($writersQuery->getPage() == $i) {
-                            echo "<span id='page-nav'><a href='writerForm?page=$i'>$i</a></span> ";
-                        } else {
-                            echo "<a href='writerForm?page=$i'>$i</a> ";
-                        }
-                        $count = $count - 8;
-                        $i++;
-                    }
-                    if ($writersQuery->getPage() >= $i) {
-                        include_once '../components/error.php';
-                    }
+                    $writersQuery->pageNav();
                     ?>
                 </div>
             </div>
         </div>
     </div>
-
     <?php
     include_once '../components/footer.php';
     ?>
-
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
         crossorigin="anonymous"></script>
