@@ -24,7 +24,7 @@
                             <a class="nav-link active" aria-current="page" href="#"><span id="orange-text">Livros</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><span id="orange-text">User</span></a>
+                            <a class="nav-link" href="/frontend/page/login"><span id="orange-text">User</span></a>
                         </li>
                     </ul>
                 </div>
