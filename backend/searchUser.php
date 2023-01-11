@@ -1,6 +1,6 @@
 <?php
 //search like db
-include('../database/connection.php');
+include('../database/Connect.php');
 
 $searchBook = filter_input(INPUT_POST, 'palavra', FILTER_SANITIZE_STRING);
 

@@ -1,7 +1,6 @@
 <?php
 session_start();
-include_once '../../database/connection.php';
-include '../components/header.php';
+include_once '../../database/Connect.php';
 include_once "../../backend/models/Books.php";
 include_once "../../backend/BooksQuery.php";
 include_once "../../backend/WritersQuery.php";
@@ -24,9 +23,11 @@ $booksQuery->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT)
     <title>Cadastros</title>
     <link rel="stylesheet" href="/assets/app.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="shortcut icon" href="/assets/imgs/library.png" type="image/x-icon">
 </head>
 
 <body>
+    <?php include '../components/header.php';?>
     <div class="text-center" id='orange-text'>
         <h1 style="margin-top: 2em;">Cadastre seu Livro</h1>
     </div>

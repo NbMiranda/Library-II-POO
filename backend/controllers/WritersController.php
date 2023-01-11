@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("../../database/connection.php");
+require_once("../../database/Connect.php");
 require_once("../models/Writers.php");
 require_once("../WritersQuery.php");
 

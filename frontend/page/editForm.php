@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once '../../database/connection.php';
+include_once '../../database/Connect.php';
 include_once '../../backend/models/Books.php';
 include_once '../../backend/BooksQuery.php';
 include_once '../../backend/models/Writers.php';
@@ -16,6 +16,7 @@ include_once '../../backend/WritersQuery.php';
     <link rel="stylesheet" href="/assets/app.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="shortcut icon" href="/assets/imgs/library.png" type="image/x-icon">
 </head>
 <?php
 include_once('../components/header.php');

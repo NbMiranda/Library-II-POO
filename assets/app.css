@@ -105,6 +105,7 @@ form{
 #writerButton:hover:hover{
     border-color: #b77905;
     background-color: #ffffff00;
+    color: orange;
 }
 
 #arrowBtn:hover{

@@ -107,6 +107,4 @@ class WritersQuery {
         $count = Connect::getConnection()->query($sql)->fetchColumn();
         return $count;
     }
-    
-
 }

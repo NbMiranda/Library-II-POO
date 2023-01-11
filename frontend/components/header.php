@@ -1,8 +1,10 @@
 <header id="nav">
+    
+
     <nav class="navbar fixed-top " style="background-color: #141414;" id="navbar">
         <div class="container">
             <a class="navbar-brand" href="/index">
-                <img src="/assets/imgs/library.png" alt="Bootstrap" width="30" height="24">
+                <img src="/assets/imgs/library.png" style="margin-bottom: 11px;" alt="Bootstrap" width="30" height="25" style="margin">
                 <span id="orange-text">Biblioteca</span>
             </a>
             <a class="navbar-brand" href="/frontend/page/writerForm?page=1"><span id="orange-text">Escritores</span></a>
