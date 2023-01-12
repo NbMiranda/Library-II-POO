@@ -12,11 +12,9 @@ $booksQuery = new BooksQuery();
 $writers = new Writers();
 $writersQuery = new WritersQuery();
 $booksQuery->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT));
-$a = 10;
-if ($a == 1) {
-    header("Location: register.php");
-}else {
-    # code...
+
+if ($_SESSION['logged'] != true) {
+    header("Location: oops");
 }
 ?>
 <!DOCTYPE html>

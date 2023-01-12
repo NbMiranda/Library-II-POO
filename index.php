@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,10 +17,10 @@
 
 <body>
     <?php
-    include ('frontend/components/header.php');
-    include ('frontend/components/textabout.php');
-    include ('frontend/components/carouselDemo.php');
-    include ('frontend/components/footer.php');
+    require_once ('frontend/components/header.php');
+    require_once ('frontend/components/textabout.php');
+    require_once ('frontend/components/carouselDemo.php');
+    require_once ('frontend/components/footer.php');
     ?>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
@@ -27,22 +30,6 @@
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
         crossorigin="anonymous"></script>
     
-    <!-- <style>
-        ::-webkit-scrollbar-track{
-            background-color: #141414;
-        }
-
-        ::-webkit-scrollbar{
-            width: 7px;
-            
-        }
-
-        ::-webkit-scrollbar-thumb{
-            background: orange;
-            border-radius: 15px;
-        }
-
-    </style> -->
 </body>
 
 </html>

@@ -12,8 +12,9 @@ if (isset($_POST['login'])){
     $user->setUSerPassword($postResult['password']);
 
     $result = $user->read();
-    // print_r($result[0]['user_password']);
+    
     if ($result) {
+        $_SESSION['logged'] = true ;
         header("Location: ../../frontend/page/cadastros?page=1");
     }else {
         $_SESSION['message'] = "<span style='color: red;'>Erro! usuario ou senha invalida<br></span>";
@@ -29,6 +30,10 @@ else if (isset($_POST['register'])){
     
     header("Location: ../../frontend/page/login");
 }
+else if (isset($_POST['logout'])) {
+    unset($_SESSION['logged']);
+    header("Location: ../../frontend/page/login");
+}
 else {
-    header("Location: ../../frontend/page/register");
+   
 }

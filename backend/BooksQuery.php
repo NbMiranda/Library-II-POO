@@ -54,7 +54,7 @@ class BooksQuery{
             
             return $booksResult->execute();
         } catch (Exception $e) {
-            print "Erro ao Inserir Livro <br>" . $e . '<br>';
+            echo "Erro ao Inserir Livro <br>" . $e . '<br>';
         }
     }
     public function read(){
@@ -126,7 +126,7 @@ class BooksQuery{
             }
             return $booksResult;
         } catch (Exception $e) {
-            print "Ocorreu um erro ao tentar Buscar Todos." . $e;
+            echo "Ocorreu um erro ao tentar Buscar Todos." . $e;
         }
     }
 

@@ -42,10 +42,8 @@ Class User{
     //Create user
     public function create(User $user){
         try {
-            // $sql = "INSERT INTO users (                   
-            //       user_name, email, user_password,) VALUES ($userName,
-            //       $userEmail, $userPasswor)";
-            $sql = "INSERT INTO users (`user_name`, `email`, `user_password`) VALUES (:userName, :email, :userPassword)";
+            $sql = "INSERT INTO users (`user_name`, `email`, `user_password`) 
+            VALUES (:userName, :email, :userPassword)";
 
             $userResult = UserConnect::getConnection()->prepare($sql);
 
@@ -55,7 +53,7 @@ Class User{
             
             return $userResult->execute();
         } catch (Exception $e) {
-            print "Erro ao Inserir usuario <br>" . $e . '<br>';
+            echo "Erro ao Inserir usuario <br>" . $e . '<br>';
         }
     }
     //Read
@@ -72,11 +70,9 @@ Class User{
                 return $result;
             }else {
                 return false;
-            }
-            
-            // return $userResult->execute();
+            }            
         } catch (Exception $e) {
-            print "Erro ao Inserir usuario <br>" . $e . '<br>';
+            echo "Erro ao Inserir usuario <br>" . $e . '<br>';
         }
     }
 

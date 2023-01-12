@@ -5,7 +5,11 @@ include_once '../../backend/models/Books.php';
 include_once '../../backend/BooksQuery.php';
 include_once '../../backend/models/Writers.php';
 include_once '../../backend/WritersQuery.php';
-    ?>
+
+if ($_SESSION['logged'] != true) {
+    header("Location: oops");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

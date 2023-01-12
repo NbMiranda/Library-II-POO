@@ -1,6 +1,9 @@
 <?php
 session_start();
 require_once("../../database/UserConnect.php");
+if ($_SESSION['logged']) {
+    header("Location: oops");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,16 +25,16 @@ require_once("../../database/UserConnect.php");
     <div class="container" id="orange-text" style="margin-top: 10em;">
         <form class="form-signin" action="/backend/controllers/UserController.php" method="post" id="loginForm">
             <div class="row" id="login">
-                <div class="col-sm-12 col-md-11 col-lg-6">
+                <div class="col-sm-12 col-md-11 col-lg-6">                 
                     <h1 class="text-center">Login</h1>
                     <!-- Input email -->
-                    <label for="inputEmail" class="sr-only" style="margin-top:2em;">Email address</label>
+                    <label for="inputEmail" class="sr-only" style="margin-top:2em;">Email</label>
                     <input type="email" id="inputEmail" class="form-control" name="email" 
-                    placeholder="Email address" required autofocus>
+                    placeholder="Digite seu Email" required autofocus>
                     <!-- Input password -->
-                    <label for="inputPassword" class="sr-only" style="margin-top:2em;">Password</label>
+                    <label for="inputPassword" class="sr-only" style="margin-top:2em;">Senha</label>
                     <input type="password" id="inputPassword" class="form-control" name="password"
-                    placeholder="Password" maxlength="16" required>
+                    placeholder="Digite sua senha" maxlength="16" required>
                     <!-- user not found message -->
                     <?php
                         if (isset($_SESSION['message'])) {

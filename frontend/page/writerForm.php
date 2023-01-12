@@ -5,6 +5,9 @@ include_once '../../database/Connect.php';
 include_once "../../backend/models/Writers.php";
 include_once "../../backend/WritersQuery.php";
 
+if ($_SESSION['logged'] != true) {
+    header("Location: oops");
+}
 $writers = new Writers();
 $writersQuery = new WritersQuery();
 

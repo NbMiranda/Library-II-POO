@@ -1,3 +1,9 @@
+<?php
+session_start();
+if ($_SESSION['logged']) {
+    header("Location: oops");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +21,7 @@
 <body>
     <?php include_once "../components/header.php"; ?>
 
-    <div class="container" id="orange-text" style="margin-top: 10em;">
+    <div class="container" id="orange-text" style="margin-top: 8em;">
         <form class="form-signin" action="/backend/controllers/UserController.php" method="post">
             <div class="row">
                 <div class="col-sm-0  col-lg-5 d-none d-lg-block">

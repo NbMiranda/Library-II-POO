@@ -1,4 +1,9 @@
- <!-- Harry  -->
+<?php
+if ($_SESSION['logged'] || !$_SESSION['logged']) {
+    header("Location: ../page/oops");
+}
+?>
+<!-- Harry  -->
  <section id="content">
     <div class="container text-center">
         <div class="row">

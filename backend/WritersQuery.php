@@ -41,7 +41,7 @@ class WritersQuery {
             
             return $writersResult->execute();
         } catch (Exception $e) {
-            print "Erro ao Inserir usuario <br>" . $e . '<br>';
+            echo "Erro ao Inserir usuario <br>" . $e . '<br>';
         }
     }
     public function read(){
@@ -55,7 +55,7 @@ class WritersQuery {
             }
             return $writersResult;
         } catch (Exception $e) {
-            print "Ocorreu um erro ao tentar Buscar Todos." . $e;
+            echo "Ocorreu um erro ao tentar Buscar Todos." . $e;
         }
     }
     public function readLimit(){
@@ -71,7 +71,7 @@ class WritersQuery {
             }
             return $writersResult;
         } catch (Exception $e) {
-            print "Ocorreu um erro ao tentar Buscar Todos." . $e;
+            echo "Ocorreu um erro ao tentar Buscar Todos." . $e;
         }
     }
     public function update(Writers $writers){
