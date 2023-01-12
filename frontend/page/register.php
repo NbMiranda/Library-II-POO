@@ -6,16 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="/assets/app.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/style.css">
     <link rel="shortcut icon" href="/assets/imgs/library.png" type="image/x-icon">
 </head>
 
 <body>
     <?php include_once "../components/header.php"; ?>
 
-    <div class="container" id="orange-text" style="margin-top: 6em;">
+    <div class="container" id="orange-text" style="margin-top: 10em;">
         <form class="form-signin" action="/backend/controllers/UserController.php" method="post">
             <div class="row">
                 <div class="col-sm-0  col-lg-5 d-none d-lg-block">
@@ -41,7 +41,7 @@
                     <!-- Input Celular -->
                     <label for="phoneNumber" class="sr-only" style="margin-top:1em;">Celular (opcional)</label>
                     <input type="text" id="phoneNumber" class="form-control" name="phoneNumber" 
-                    placeholder="(xx) xxxxx-xxxx" required>
+                    placeholder="(xx) xxxxx-xxxx">
                     <!-- Submit button -->
                     <button class="btn btn-lg btn-outline-warning btn-block" style="margin-top: 2em;" 
                     name="register" id="writerButton" type="submit">Sign in</button>

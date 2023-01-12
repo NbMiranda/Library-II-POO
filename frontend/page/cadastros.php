@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include_once '../../database/Connect.php';
 include_once "../../backend/models/Books.php";
 include_once "../../backend/BooksQuery.php";
@@ -11,7 +12,12 @@ $booksQuery = new BooksQuery();
 $writers = new Writers();
 $writersQuery = new WritersQuery();
 $booksQuery->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT));
-
+$a = 10;
+if ($a == 1) {
+    header("Location: register.php");
+}else {
+    # code...
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,8 +27,8 @@ $booksQuery->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT)
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastros</title>
-    <link rel="stylesheet" href="/assets/app.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/style.css">
     <link rel="shortcut icon" href="/assets/imgs/library.png" type="image/x-icon">
 </head>
 

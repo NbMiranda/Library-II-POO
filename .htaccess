@@ -3,4 +3,4 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php
 
-ErrorDocument 404 /frontend/components/errorPage.php
+ErrorDocument 404 /frontend/page/errorPage.php

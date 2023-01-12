@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("../../database/UserConnect.php");
 ?>
 <!DOCTYPE html>
@@ -9,16 +10,16 @@ require_once("../../database/UserConnect.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="/assets/app.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/style.css">
     <link rel="shortcut icon" href="/assets/imgs/library.png" type="image/x-icon">
 </head>
 
 <body>
     <?php include_once "../components/header.php"; ?>
 
-    <div class="container" id="orange-text" style="margin-top: 8em;">
+    <div class="container" id="orange-text" style="margin-top: 10em;">
         <form class="form-signin" action="/backend/controllers/UserController.php" method="post" id="loginForm">
             <div class="row" id="login">
                 <div class="col-sm-12 col-md-11 col-lg-6">
@@ -30,7 +31,14 @@ require_once("../../database/UserConnect.php");
                     <!-- Input password -->
                     <label for="inputPassword" class="sr-only" style="margin-top:2em;">Password</label>
                     <input type="password" id="inputPassword" class="form-control" name="password"
-                    placeholder="Password" minlength="6" maxlength="16" required>
+                    placeholder="Password" maxlength="16" required>
+                    <!-- user not found message -->
+                    <?php
+                        if (isset($_SESSION['message'])) {
+                            echo $_SESSION['message'];
+                            unset($_SESSION['message']);
+                        }
+                    ?>
                     <!-- Register link -->
                     <p style="margin-top:1.4em; font-size:.9em;"><a href="/frontend/page/register">Não é membro? se registre agora!</a></p>
                     <!-- Submit button -->

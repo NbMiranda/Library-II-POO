@@ -40,19 +40,44 @@ Class User{
         return $this->phoneNumber;
     }
     //Create user
-    public function create(){
+    public function create(User $user){
         try {
-            $sql = "INSERT INTO users (                   
-                  user_name, email, user_password,) VALUES (:username,
-                  :email, :userPassword)";
+            // $sql = "INSERT INTO users (                   
+            //       user_name, email, user_password,) VALUES ($userName,
+            //       $userEmail, $userPasswor)";
+            $sql = "INSERT INTO users (`user_name`, `email`, `user_password`) VALUES (:userName, :email, :userPassword)";
 
             $userResult = UserConnect::getConnection()->prepare($sql);
-            $userResult->bindValue(":userName", $this->getUserName());
-            $userResult->bindValue(":email", $this->getEmail());
+
+            $userResult->bindValue(":userName", $user->getUserName());
+            $userResult->bindValue(":email", $user->getEmail());
+            $userResult->bindValue(":userPassword", $user->getUserPassword());
             
             return $userResult->execute();
         } catch (Exception $e) {
             print "Erro ao Inserir usuario <br>" . $e . '<br>';
         }
     }
+    //Read
+    public function read(){
+        try {
+            $sql = "SELECT * FROM users where email = :email ";
+                        
+            $userResult = UserConnect::getConnection()->prepare($sql);
+            $userResult->bindValue(":email", $this->getEmail());
+            $userResult->execute();
+            $result = $userResult->fetchAll();
+
+            if ($result[0]['user_password'] == $this->getUserPassword()) {
+                return $result;
+            }else {
+                return false;
+            }
+            
+            // return $userResult->execute();
+        } catch (Exception $e) {
+            print "Erro ao Inserir usuario <br>" . $e . '<br>';
+        }
+    }
+
 }

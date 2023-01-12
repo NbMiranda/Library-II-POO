@@ -102,10 +102,10 @@ form{
     border: 1px solid orange; */
 }
 
-#writerButton:hover:hover{
+#writerButton:hover{
     border-color: #b77905;
     background-color: #ffffff00;
-    color: orange;
+    color: #b77905 !important;
 }
 
 #arrowBtn:hover{
