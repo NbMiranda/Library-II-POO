@@ -1,23 +1,15 @@
-# Librarty 
+# Library 
 
+## Necessario permissão para a pasta build, dentro da pasta rode o comando
+```
 chmod u+x entrypoint.sh
+```
 
-chown 1000:1000 vendor
+## Caso composer install de erro, rode os comandos dentro do container
+```
+docker exec -ti container bash
+```
 
-## Instalação do composer necessaria
-
-sudo apt install composer
-
-### Delete a pasta **vendor** e depois rode o comando abaixo na pasta raiz
-
+```
 composer require vlucas/phpdotenv
-
-## INTALANDO PDO(caso de erro com o Dockerfile)
-
-docker exec -ti <php-container> sh
-
-docker-php-ext-install pdo pdo_mysql
-
-docker-php-ext-enable pdo pdo_mysql
-
-apachectl restart
+```
