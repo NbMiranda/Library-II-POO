@@ -1,8 +1,3 @@
-<?php
-if ($_SESSION['logged'] || !$_SESSION['logged']) {
-    header("Location: ../page/oops");
-}
-?>
 <div class="row" id="error">
     <div class="col-12"></div>
     <style>

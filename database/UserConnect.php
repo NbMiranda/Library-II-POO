@@ -12,12 +12,17 @@ define('DATABASE', $_ENV['DB_USER_DATABASE']);
 class UserConnect{
     public static $connection;
 
-    public static function getConnection(){
+    public function __construct(){
         if (!isset(self::$connection)) {
             self::$connection = new PDO("mysql:host=".HOST.";dbname=".DATABASE, USER, PASSWORD);
             self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             self::$connection->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING);
         }
+        $this->connection =  self::$connection;
+        
+    }
+
+    public static function getConnection(){
         return self::$connection;
     }
 }

@@ -1,13 +1,13 @@
 <?php
-
-Class User{
+include_once("../../database/UserConnect.php");
+Class User extends UserConnect{
     protected $id;
     protected $userName;
     private $email;
     private $userPassword;
     protected $phoneNumber;
 
-    //Setter
+    //Setters
     public function setId($id){
         $this->id = $id;
     }
@@ -45,7 +45,7 @@ Class User{
             $sql = "INSERT INTO users (`user_name`, `email`, `user_password`) 
             VALUES (:userName, :email, :userPassword)";
 
-            $userResult = UserConnect::getConnection()->prepare($sql);
+            $userResult = $this->getConnection()->prepare($sql);
 
             $userResult->bindValue(":userName", $user->getUserName());
             $userResult->bindValue(":email", $user->getEmail());
@@ -61,7 +61,7 @@ Class User{
         try {
             $sql = "SELECT * FROM users where email = :email ";
                         
-            $userResult = UserConnect::getConnection()->prepare($sql);
+            $userResult = $this->getConnection()->prepare($sql);
             $userResult->bindValue(":email", $this->getEmail());
             $userResult->execute();
             $result = $userResult->fetchAll();

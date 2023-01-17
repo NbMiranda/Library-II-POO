@@ -16,9 +16,11 @@ if (isset($_POST['login'])){
     if ($result) {
         $_SESSION['logged'] = true ;
         header("Location: ../../frontend/page/cadastros?page=1");
+        die();
     }else {
         $_SESSION['message'] = "<span style='color: red;'>Erro! usuario ou senha invalida<br></span>";
         header("Location: ../../frontend/page/login");
+        die();
     }    
 }
 else if (isset($_POST['register'])){
@@ -29,10 +31,12 @@ else if (isset($_POST['register'])){
     $user->create($user);
     
     header("Location: ../../frontend/page/login");
+    die();
 }
 else if (isset($_POST['logout'])) {
     unset($_SESSION['logged']);
     header("Location: ../../frontend/page/login");
+    die();
 }
 else {
    

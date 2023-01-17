@@ -1,7 +1,4 @@
 <?php
-if ($_SESSION['logged'] || !$_SESSION['logged']) {
-    header("Location: ../page/oops");
-}
 if ($_SESSION['logged']) {
     $_SESSION['btn'] = "<button class='nav-item btn btn-link' type='submit' name='logout'
     style='margin-left:-14px; color: orange;'>Logout</button>";

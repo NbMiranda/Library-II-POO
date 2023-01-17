@@ -6,8 +6,9 @@ include_once '../../backend/BooksQuery.php';
 include_once '../../backend/models/Writers.php';
 include_once '../../backend/WritersQuery.php';
 
-if ($_SESSION['logged'] != true) {
+if (!$_SESSION['logged']) {
     header("Location: oops");
+    die();
 }
 ?>
 <!DOCTYPE html>
@@ -86,12 +87,11 @@ $booksQuery->setInputPost(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_I
                         <select class="form-select" aria-label="Default select example" name="genre" required>
                             <option value="">-- Escolha o Gênero --</option>
                             <?php
-                            foreach ($books->genres() as $row) {
-                                $genre = $row;
-                                if ($booksResult[0]['genre'] === $genre) {
-                                    echo "<option value='$genre' selected>$genre</option>";
+                            foreach (Books::genres() as $row) {
+                                if ($booksResult[0]['genre'] === $row) {
+                                    echo "<option value='$row' selected>$row</option>";
                                 }else {
-                                    echo "<option value='$genre'>$genre</option>";
+                                    echo "<option value='$row'>$row</option>";
                                 }
                             }
                             ?>

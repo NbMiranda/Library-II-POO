@@ -1,8 +1,3 @@
-<?php
-if ($_SESSION['logged'] || !$_SESSION['logged']) {
-    header("Location: ../page/oops");
-}
-?>
 <section class="container" id="first-carousel">
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
         <div class="carousel-indicators">

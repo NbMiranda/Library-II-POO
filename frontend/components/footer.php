@@ -1,8 +1,3 @@
-<?php
-if ($_SESSION['logged'] || !$_SESSION['logged']) {
-    header("Location: ../page/oops");
-}
-?>
 <footer>
     <div class="container  ">
         <hr>

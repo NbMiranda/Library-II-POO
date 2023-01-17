@@ -5,8 +5,9 @@ include_once '../../database/Connect.php';
 include_once "../../backend/models/Writers.php";
 include_once "../../backend/WritersQuery.php";
 
-if ($_SESSION['logged'] != true) {
+if (!$_SESSION['logged']) {
     header("Location: oops");
+    die();
 }
 $writers = new Writers();
 $writersQuery = new WritersQuery();
@@ -65,7 +66,6 @@ $writersQuery->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_IN
                 <?php
                 foreach ($writersQuery->readLimit() as $row) {
                     $writerName = $row->getWriterName();
-                    $id = $row->getId();
                     echo "<p>$writerName</p>";
                 }
                 ?>

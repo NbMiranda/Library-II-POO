@@ -15,18 +15,18 @@
 <body>
     <?php include_once "../components/header.php"; ?>
     <div class="container">
-        <div class="row" style="margin-top: 8em;">
-            <div class="col-5">
+        <div class="row" style="margin-top: 7em;">
+            <div class="col-sm-0 col-lg-5 d-none d-lg-block">
                 <img src="/assets/imgs/confusednew.png" alt="">
             </div>
-            <div class="col-1">
-                
-            </div>
-            <div class="col-5 text-center">
+            
+            <div class="col-sm-0 col-lg-1 col-md-1"></div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6">
                 <h1 id="orange-text" style="font-size:3em; margin-top: 1.7em;">OPPS!</h1>
                 <p style="font-size: 1.7em;">
                     Opps, parece que você não tem acesso a essa pagina
-                    <span id="orange-text">(-_-;)</span>, ou não está <a href="/frontend/page/login">logado</a>
+                    <span id="orange-text">(-_-)</span>, ou não está logado
                     ainda, faça o <a href="/frontend/page/login">login</a> para ter acesso a todo o nosso conteudo,
                     caso não tenha um registro <a href="/frontend/page/register">registre-se</a> agora.   
                 </p>

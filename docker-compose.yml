@@ -29,7 +29,7 @@ services:
     ports:
       - 8080:80
     volumes:
-      - /home/nate/docker:/var/www/html/
+      - ./:/var/www/html/
     networks:
       - php-network
 networks:

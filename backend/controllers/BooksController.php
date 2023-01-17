@@ -22,6 +22,7 @@ if(isset($_POST['register'])){
 
     $_SESSION['msg'] = "<p id='book_success' class='container'>Livro cadastrado com sucesso</p>";
     header("Location: ../../frontend/page/cadastros?page=1");
+    die();
 } 
 elseif (isset($_POST['edit'])) {
     $books->setId($postResult['bookEditId']);
@@ -34,6 +35,7 @@ elseif (isset($_POST['edit'])) {
 
     $_SESSION['msg'] = "<p id='book_success' class='container'>Livro editado com sucesso</p>";
     header("Location: ../../frontend/page/cadastros?page=1");
+    die();
 }
 elseif (isset($_POST['delete'])) {
     $books->setId($postResult['writerId']);
@@ -41,4 +43,5 @@ elseif (isset($_POST['delete'])) {
 
     $_SESSION['msg'] = "<p id='book_success' class='container'>Livro deletado com sucesso</p>";
     header("Location: ../../frontend/page/cadastros?page=1");
+    die();
 }

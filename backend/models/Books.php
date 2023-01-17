@@ -9,7 +9,7 @@ class Books{
     protected $otherGenre;
     protected $writerName;
     //Função de gêneros
-    public function genres(){
+    public static function genres(){
         $genres = array('Acao e aventura', 'Biografia', 'Drama', 'Ficcao', 'Terror',
          'Humor', 'Infantil', 'Romance', 'Religioso');
         return $genres;

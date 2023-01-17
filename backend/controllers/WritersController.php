@@ -16,6 +16,7 @@ if(isset($_POST['register'])){
 
     $_SESSION['msg'] = "<p id='book_success'>Escritor cadastrado com sucesso</p>";
     header("Location: ../../frontend/page/writerForm?page=1");
+    die();
 } 
 elseif (isset($_POST['edit'])) {
     $writers->setId($postResult['writerEditId']);
@@ -24,6 +25,7 @@ elseif (isset($_POST['edit'])) {
 
     $_SESSION['msg'] = "<p id='book_success'>Escritor editado com sucesso</p>";
     header("Location: ../../frontend/page/writerForm?page=1");
+    die();
 }
 elseif (isset($_POST['delete'])) {
     $writers->setId($postResult['writerNameDel']);
@@ -31,4 +33,5 @@ elseif (isset($_POST['delete'])) {
 
     $_SESSION['msg'] = "<p id='book_success'>Escritor deletado com sucesso</p>";
     header("Location: ../../frontend/page/writerForm?page=1");
+    die();
 }

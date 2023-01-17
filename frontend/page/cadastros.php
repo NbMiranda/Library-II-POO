@@ -13,8 +13,9 @@ $writers = new Writers();
 $writersQuery = new WritersQuery();
 $booksQuery->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT));
 
-if ($_SESSION['logged'] != true) {
+if (!$_SESSION['logged']) {
     header("Location: oops");
+    die();
 }
 ?>
 <!DOCTYPE html>
@@ -80,9 +81,8 @@ if ($_SESSION['logged'] != true) {
                         <select class="form-select " aria-label="Default select example" name="genre" id="genre" required>
                             <option value="">-- Escolha o Gênero --</option>
                             <?php                       
-                            foreach ($books->genres() as $row) {
-                                $genre = $row;
-                                echo "<option value='$genre'>$genre</option>";
+                            foreach (Books::genres() as $row) {
+                                echo "<option value='$row'>$row</option>";
                             }
                             ?>
                         </select>
