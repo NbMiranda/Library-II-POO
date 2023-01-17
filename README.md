@@ -13,3 +13,4 @@ docker exec -ti container bash
 ```
 composer require vlucas/phpdotenv
 ```
+
