@@ -28,7 +28,7 @@ $writers->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT));
     <!-- writer register writer Form -->
     <div class="container" id="orange-text">
         <h1 class="text-center" style="margin:1.5em;">Escritores</h1>
-        <form action="../../backend/controllers/WritersController.php" method="post">
+        <form action="../../backend/operations/writersOperation.php" method="post">
             <div class="form-group" id="forms">
                 <?php
                 if (isset($_SESSION['msg'])) {
@@ -69,7 +69,7 @@ $writers->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT));
             <!-- writer edit form -->
             <div class="col-6">
                 <div class="form-group">
-                    <form action="../../backend/controllers/WritersController.php" method="post">
+                    <form action="../../backend/operations/writersOperation.php" method="post">
                         <label for="writerNameEdit">Nome do escritor</label>
                         <select class="form-select" aria-label="Default select example" name="writerEditId"
                             id="writerEditId" required>
@@ -92,7 +92,7 @@ $writers->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT));
                         <button type="submit" class="btn btn-primary" name="edit" style="margin-top:1em;">Editar</button>
                     </form>
                     <!-- Delete writer form -->
-                    <form action="../../backend/controllers/WritersController.php" method="post" style="color: black; margin-top:1em;">
+                    <form action="../../backend/operations/writersOperation.php" method="post" style="color: black; margin-top:1em;">
                         <!-- Button trigger modal -->
                         <button type="button" name="delete" class="btn btn-danger" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">
