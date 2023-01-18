@@ -15,7 +15,7 @@
 <body>
     <?php include_once "../components/header.php"; ?>
     <div class="container">
-        <div class="row" style="margin-top: 7em;">
+        <div class="row" style="margin-top: 18vh;">
             <div class="col-sm-0 col-lg-5 d-none d-lg-block">
                 <img src="/assets/imgs/confusednew.png" alt="">
             </div>
@@ -42,7 +42,6 @@
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/src/app.js"></script>
 </body>
 
 </html>

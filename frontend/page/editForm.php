@@ -37,7 +37,7 @@ $books->setInputPost(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
                 echo $booksResult[0]['book_name'];
                 ?>
             </i> </h2>
-        <form action="../../backend/controllers/BooksController.php" method="post">
+        <form action="../../backend/operations/booksOperation.php" method="post">
             <input type="hidden" name="bookEditId" value="<?php echo $booksResult[0]['id'] ?>">
             <div class="row" id="orange-text">
 
@@ -120,7 +120,7 @@ $books->setInputPost(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
     <div class="container text-center">
         <div class="row">
             <div class="col-12">
-                <form action="../../backend/controllers/BooksController.php" method="post">
+                <form action="../../backend/operations/booksOperation.php" method="post">
                 <input type="hidden" name="writerId" value="<?php echo $booksResult[0]['id'] ?>">
                     <!-- Button Modal -->
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">

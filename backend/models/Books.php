@@ -215,7 +215,7 @@ class Books extends Connect {
         $count = $this->getConnection()->query($sql)->fetchColumn();
         return $count;
     }
-    public function searchUser($searchBook){
+    public function selectLike($searchBook){
         try {
             $sql = "SELECT * FROM books WHERE book_name like '%$searchBook%'";
             $sqlSearch = $this->getConnection()->prepare($sql);
@@ -227,4 +227,17 @@ class Books extends Connect {
         }
 
     }
+    // public function selectLike($searchBook){
+    //     try {
+    //         $sql = "SELECT * FROM books WHERE book_name like '%$searchBook%'";
+    //         $sqlSearch = $this->getConnection()->prepare($sql);
+    //         $sqlSearch->execute(array());
+    //         $resultSearch = $sqlSearch->fetchAll(PDO::FETCH_ASSOC);
+    //         return $resultSearch;
+            
+    //     } catch (Exception $e) {
+    //         echo "Ocorreu um erro ao Buscar os livros." . $e;
+    //     }
+        
+    // }
 }

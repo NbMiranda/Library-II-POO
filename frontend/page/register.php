@@ -22,8 +22,8 @@ if ($_SESSION['logged']) {
 <body>
     <?php include_once "../components/header.php"; ?>
 
-    <div class="container" id="orange-text" style="margin-top: 6em;">
-        <form class="form-signin" action="/backend/controllers/UserController.php" method="post">
+    <div class="container" id="orange-text" style="margin-top: 15vh;">
+        <form class="form-signin" action="/backend/operations/userOperation.php" method="post">
             <div class="row">
                 <div class="col-sm-0  col-lg-5 d-none d-lg-block">
                     <img src="/assets/imgs/study.png" alt="">
@@ -66,7 +66,6 @@ if ($_SESSION['logged']) {
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/src/app.js"></script>
 </body>
 
 </html>

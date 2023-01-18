@@ -31,7 +31,7 @@ if ($_SESSION['logged']) {
                             <a class="nav-link active" aria-current="page" href="#"><span id="orange-text">Livros</span></a>
                         </li>
                         <li class="nav-item">
-                            <form action="/backend/controllers/UserController.php" method="post">
+                            <form action="/backend/operations/userOperation.php" method="post">
                             <?php
                                 if (isset($_SESSION['btn'])) {
                                     echo $_SESSION['btn'];
