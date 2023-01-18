@@ -6,7 +6,7 @@ $(function(){
             var dados = {
                 palavra : search
             }
-            $.post('/backend/searchUser.php', dados, function(retorna){
+            $.post('/backend/controllers/searchUser.php', dados, function(retorna){
                 $(".resultado").html(retorna);
             });
         }else if (search === ''){

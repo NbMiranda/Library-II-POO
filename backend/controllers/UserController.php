@@ -2,7 +2,6 @@
 session_start();
 require_once "../models/Users.php";
 require_once "../../database/UserConnect.php";
-// require_once "";
 $user = new User();
 
 $postResult = filter_input_array(INPUT_POST);

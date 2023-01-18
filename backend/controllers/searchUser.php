@@ -1,12 +1,10 @@
 <?php
 //search like db
-include('../database/Connect.php');
+include('../../database/Connect.php');
+include_once "../models/Books.php";
 
-$searchBook = filter_input(INPUT_POST, 'palavra', FILTER_SANITIZE_STRING);
-
-$sqlSearch = Connect::getConnection()->prepare("SELECT * FROM books WHERE book_name like '%$searchBook%'");
-$sqlSearch->execute(array());
-$resultSearch = $sqlSearch->fetchAll();
+$books = new Books;
+$resultSearch = $books->searchUser(filter_input(INPUT_POST, 'palavra', FILTER_SANITIZE_STRING));
 
 if (($resultSearch)) {
     foreach ($resultSearch as $key) {

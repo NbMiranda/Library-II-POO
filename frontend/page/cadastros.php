@@ -1,17 +1,11 @@
 <?php
 session_start();
-
-include_once '../../database/Connect.php';
 include_once "../../backend/models/Books.php";
-include_once "../../backend/BooksQuery.php";
-include_once "../../backend/WritersQuery.php";
 include_once "../../backend/models/Writers.php";
 
 $books = new Books();
-$booksQuery = new BooksQuery();
 $writers = new Writers();
-$writersQuery = new WritersQuery();
-$booksQuery->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT));
+$books->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT));
 
 if (!$_SESSION['logged']) {
     header("Location: oops");
@@ -60,7 +54,7 @@ if (!$_SESSION['logged']) {
                             id="writerId">
                             <option value="">-- Escolha o escritor --</option>
                             <?php
-                            foreach ($writersQuery->read() as $row) {
+                            foreach ($writers->read() as $row) {
                                 $writerName = $row->getWriterName();
                                 $writer_id = $row->getId();
                                 echo "<option value='$writer_id'>$writerName</option>";
@@ -147,7 +141,7 @@ if (!$_SESSION['logged']) {
             </div>    
         </div>";   
     
-    foreach ($booksQuery->readLimit() as $key ) {
+    foreach ($books->readLimit() as $key ) {
         $book_name = $key->getBookName();
         $writer_name = $key->getWriterName();
         $genre = $key->getGenre();
@@ -173,7 +167,7 @@ if (!$_SESSION['logged']) {
     ?>
     <div class="container text-center" style="font-size: 1.4em;">
         <?php
-        $booksQuery->pageNav();
+        $books->pageNav();
         ?>
     </div>
     <?php

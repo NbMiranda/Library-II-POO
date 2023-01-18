@@ -2,17 +2,15 @@
 session_start();
 require_once("../../database/Connect.php");
 require_once("../models/Writers.php");
-require_once("../WritersQuery.php");
 
 $writers = new Writers();
-$writersQuery = new WritersQuery();
 
 $postResult = filter_input_array(INPUT_POST);
 
 if(isset($_POST['register'])){
 
     $writers->setWriterName($postResult['writerName']);
-    $writersQuery->create($writers);
+    $writers->create($writers);
 
     $_SESSION['msg'] = "<p id='book_success'>Escritor cadastrado com sucesso</p>";
     header("Location: ../../frontend/page/writerForm?page=1");
@@ -21,7 +19,7 @@ if(isset($_POST['register'])){
 elseif (isset($_POST['edit'])) {
     $writers->setId($postResult['writerEditId']);
     $writers->setWriterName($postResult['editWriter']);
-    $writersQuery->update($writers);
+    $writers->update($writers);
 
     $_SESSION['msg'] = "<p id='book_success'>Escritor editado com sucesso</p>";
     header("Location: ../../frontend/page/writerForm?page=1");
@@ -29,7 +27,7 @@ elseif (isset($_POST['edit'])) {
 }
 elseif (isset($_POST['delete'])) {
     $writers->setId($postResult['writerNameDel']);
-    $writersQuery->delete($writers);
+    $writers->delete($writers);
 
     $_SESSION['msg'] = "<p id='book_success'>Escritor deletado com sucesso</p>";
     header("Location: ../../frontend/page/writerForm?page=1");

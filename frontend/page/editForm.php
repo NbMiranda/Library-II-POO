@@ -1,10 +1,7 @@
 <?php
 session_start();
-include_once '../../database/Connect.php';
 include_once '../../backend/models/Books.php';
-include_once '../../backend/BooksQuery.php';
 include_once '../../backend/models/Writers.php';
-include_once '../../backend/WritersQuery.php';
 
 if (!$_SESSION['logged']) {
     header("Location: oops");
@@ -27,10 +24,8 @@ if (!$_SESSION['logged']) {
 include_once('../components/header.php');
 
 $books = new Books();
-$booksQuery = new BooksQuery();
 $writers = new Writers();
-$writersQuery = new WritersQuery();
-$booksQuery->setInputPost(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
+$books->setInputPost(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
 ?>
 <body>
     <!-- Edit form -->
@@ -38,7 +33,7 @@ $booksQuery->setInputPost(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_I
         <h1 class="text-center" id="orange-text" style="margin:1.4em;">Edite o livro</h1>
         <h2 class='text-center'><i>
                 <?php
-                $booksResult = $booksQuery->readOne();
+                $booksResult = $books->readOne();
                 echo $booksResult[0]['book_name'];
                 ?>
             </i> </h2>
@@ -61,7 +56,7 @@ $booksQuery->setInputPost(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_I
                             <option value="">-- Escolha o escritor --</option>
                             <?php
 
-                            foreach ($writersQuery->read() as $row) {
+                            foreach ($writers->read() as $row) {
                                 $writerName = $row->getWriterName();
                                 $writer_id = $row->getId();
                                 if ($booksResult[0]['writer_id'] === $writer_id) {

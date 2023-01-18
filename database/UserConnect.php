@@ -18,10 +18,8 @@ class UserConnect{
             self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             self::$connection->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING);
         }
-        $this->connection =  self::$connection;
-        
+        $this->connection = self::$connection;
     }
-
     public static function getConnection(){
         return self::$connection;
     }

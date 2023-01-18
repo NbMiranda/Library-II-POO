@@ -23,7 +23,7 @@ if ($_SESSION['logged']) {
 <body>
     <?php include_once "../components/header.php"; ?>
 
-    <div class="container" id="orange-text" style="margin-top: 8em;">
+    <div class="container" id="orange-text" style="margin-top: 20vh;">
         <form class="form-signin" action="/backend/controllers/UserController.php" method="post" id="loginForm">
             <div class="row" id="login">
                 <div class="col-sm-12 col-md-11 col-lg-6">                 

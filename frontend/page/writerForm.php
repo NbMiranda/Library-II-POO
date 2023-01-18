@@ -1,18 +1,14 @@
 <?php
 session_start();
-
-include_once '../../database/Connect.php';
 include_once "../../backend/models/Writers.php";
-include_once "../../backend/WritersQuery.php";
 
 if (!$_SESSION['logged']) {
     header("Location: oops");
     die();
 }
 $writers = new Writers();
-$writersQuery = new WritersQuery();
 
-$writersQuery->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT));
+$writers->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,7 +60,7 @@ $writersQuery->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_IN
         <div class="row">
             <div class="col-6 text-center" style="font-size: 1.2em;">
                 <?php
-                foreach ($writersQuery->readLimit() as $row) {
+                foreach ($writers->readLimit() as $row) {
                     $writerName = $row->getWriterName();
                     echo "<p>$writerName</p>";
                 }
@@ -79,7 +75,7 @@ $writersQuery->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_IN
                             id="writerEditId" required>
                             <option value="">-- Escritor que quer editar --</option>
                             <?php
-                            foreach ($writersQuery->read() as $row) {
+                            foreach ($writers->read() as $row) {
                                 $writerName = $row->getWriterName();
                                 $writer_id = $row->getId();
 
@@ -118,7 +114,7 @@ $writersQuery->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_IN
                                         id="writerNameDel" required>
                                         <option value="">-- Escritor que quer deletar --</option>
                                         <?php
-                                        foreach ($writersQuery->read() as $row) {
+                                        foreach ($writers->read() as $row) {
                                             $writerName = $row->getWriterName();
                                             $idWriter = $row->getId();
 
@@ -146,7 +142,7 @@ $writersQuery->setPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_IN
             <div class="col-6">
                 <div style="font-size: 1.4em;">
                     <?php
-                    $writersQuery->pageNav();
+                    $writers->pageNav();
                     ?>
                 </div>
             </div>
