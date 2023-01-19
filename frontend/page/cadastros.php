@@ -20,13 +20,14 @@ if (!$_SESSION['logged']) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastros</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/style.css">
     <link rel="shortcut icon" href="/assets/imgs/library.png" type="image/x-icon">
 </head>
 
 <body>
-    <?php include '../components/header.php';?>
+    <?php include '../components/header.php'; ?>
     <div class="text-center" id='orange-text'>
         <h1 style="margin-top: 2em;">Cadastre seu Livro</h1>
     </div>
@@ -34,7 +35,7 @@ if (!$_SESSION['logged']) {
     if (isset($_SESSION['msg'])) {
         echo $_SESSION['msg'];
         unset($_SESSION['msg']);
-    }   
+    }
     ?>
 
     <!-- register form -->
@@ -63,18 +64,19 @@ if (!$_SESSION['logged']) {
                         </select>
                     </div>
                 </div>
-                <div class="col-2" >
-                    <a href="writerForm?page=1" class="btn btn-outline-warning"
-                     id="writerButton" style="margin-top:3.1em;">Novo escritor</a>    
+                <div class="col-2">
+                    <a href="writerForm?page=1" class="btn btn-outline-warning" id="writerButton"
+                        style="margin-top:3.1em;">Novo escritor</a>
                 </div>
             </div>
             <div class="row" id="orange-text">
                 <div class="col-6" id="forms">
                     <div class="form-group">
                         <label for="genre">Genero</label>
-                        <select class="form-select " aria-label="Default select example" name="genre" id="genre" required>
+                        <select class="form-select " aria-label="Default select example" name="genre" id="genre"
+                            required>
                             <option value="">-- Escolha o Gênero --</option>
-                            <?php                       
+                            <?php
                             foreach (Books::genres() as $row) {
                                 echo "<option value='$row'>$row</option>";
                             }
@@ -85,18 +87,59 @@ if (!$_SESSION['logged']) {
                 <div class="col-6" id="forms">
                     <div class="form-group">
                         <label for="otherGenre">Gêneros secundarios</label>
-                        <input type="text" minlength="2" maxlength="50" class="form-control" 
-                            name="otherGenre" id="other-genres">
+                        <input type="text" minlength="2" maxlength="50" class="form-control" name="otherGenre"
+                            id="other-genres">
                     </div>
                 </div>
             </div>
             <div class="row" id="orange-text">
-                <div class="form-group col-12" id="forms">
+                <div class="form-group col-6" id="forms">
                     <label for="textarea" id="orange-text">Sinopse</label>
-                    <textarea class="form-control" name="sinopse" id="textarea" cols="20"
-                     rows="6"></textarea>
+                    <textarea class="form-control" name="sinopse" id="textarea" cols="20" rows="14"></textarea>
                 </div>
+                <div class="form-group col-6" id="forms">
+                    <label class="form-label" for="customFile">Capa do Livro</label>
+                    <input type="file" class="form-control" id="customFile" />
+                    <!-- <input type="file" id="customFile" /> -->
+                    <div id="display" style="border: 1px solid red;width: 30.4em;height: 15em;display: inline-flex;flex-direction: row;">
+                        
+                    </div>
+                </div>
+                <style>
+                    #display{
+                        background-position: center;
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                    }
+                </style>
+                <script>
+                    const customFile = document.querySelector("#customFile");
+                    var uploadedImage = "";
+
+                    customFile.addEventListener("change", function(){
+                        const reader = new FileReader();
+                        reader.addEventListener("load", () => {
+                            uploadedImage = reader.result;
+                            document.querySelector("#display").style.backgroundImage = `url(${uploadedImage})`;
+                        });
+                        reader.readAsDataURL(this.files[0]);
+                    })
+                </script>
+
             </div>
+            <!-- <div class="row">
+                <div class="form-group col-6" id="forms">
+                    <label class="form-label" for="customFile">Capa do Livro</label>
+                    <input type="file" class="form-control" id="customFile" />
+                    
+                </div>
+                <div class="form-group col-6" id="forms">
+                    <div id="display" style="border: 1px solid red; width: 300px; height: 300px; display: flex;">
+                        Imagem </br>
+                        <img src="/assets/imgs/hp1.jpg" alt="">
+                    </div>
+                </div>
+            </div> -->
             <button type="submit" name="register" class="btn btn-light" id="forms">Cadastrar</button>
         </form>
     </div>
@@ -105,32 +148,37 @@ if (!$_SESSION['logged']) {
     <!-- Collapse Search DB -->
     <div class="container ">
         <h2 id='orange-text' class="text-center" style='margin-top: 2em;'>Livros Cadastrados
-        <button class="btn btn-outline-warning" id="arrowBtn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            <i class="bi bi-caret-down-fill"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-            </svg></i>
-        </button>
+            <button class="btn btn-outline-warning" id="arrowBtn" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                <i class="bi bi-caret-down-fill"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                    </svg></i>
+            </button>
         </h2>
         <!-- Collapse search book -->
         <div class="row ">
             <div class="col-4"></div>
             <div class="col-4" style="padding: 0;">
                 <div class="collapse" id="collapseExample">
-                    <div class="card card-body" style="background-color:#141414; font-size: 1.2em; border: none; padding:0;">
+                    <div class="card card-body"
+                        style="background-color:#141414; font-size: 1.2em; border: none; padding:0;">
                         <div class="form-group">
                             <form action="" method="post">
                                 <label for="search" style="font-size: .8em !important;">Pesquise um Livro</label>
-                                <input type="text" class="form-control" name="search" id="search" placeholder="Nome do Livro" style="margin-bottom: 1em;">
+                                <input type="text" class="form-control" name="search" id="search"
+                                    placeholder="Nome do Livro" style="margin-bottom: 1em;">
                             </form>
                             <ul class="resultado" style="padding:0;"></ul>
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-4"></div>
         </div>
         <!-- select books output -->
-    </div>   
+    </div>
     <?php
     echo "<div class='container text-center'>
             <div class='row' style='margin-top:2em;'>
@@ -139,9 +187,9 @@ if (!$_SESSION['logged']) {
                 <div class='col-3'> <h3>Gênero</h3></div>
                 <div class='col-3'> <h3></h3></div>
             </div>    
-        </div>";   
-    
-    foreach ($books->readLimit() as $key ) {
+        </div>";
+
+    foreach ($books->readLimit() as $key) {
         $book_name = $key->getBookName();
         $writer_name = $key->getWriterName();
         $genre = $key->getGenre();
@@ -162,7 +210,7 @@ if (!$_SESSION['logged']) {
               </svg></i></a>        
                 </div>
             </div>   
-        </div>"; 
+        </div>";
     }
     ?>
     <div class="container text-center" style="font-size: 1.4em;">
@@ -173,8 +221,12 @@ if (!$_SESSION['logged']) {
     <?php
     include '../components/footer.php';
     ?>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script type="text/javascript" src="/src/script.js"></script>
 </body>

@@ -19,7 +19,8 @@ Class User extends UserConnect {
         $this->email = $email;
     }
     public function setUserPassword($userPassword){
-        $this->userPassword = $userPassword;
+        // $cripUserPassword = base64_encode($userPassword);
+        $this->userPassword = base64_encode($userPassword);
     }
     public function setPhoneNumber($phoneNumber){
         $this->phoneNumber = $phoneNumber;

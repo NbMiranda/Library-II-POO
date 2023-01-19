@@ -13,7 +13,7 @@ class BooksController {
     public function getPost() {
         return $this->post;
     }
-    //
+    //Metodos
     public function register(){
         $books = new Books;
         $postResult = $this->getPost();
