@@ -76,38 +76,5 @@ Class User extends UserConnect {
             echo "Erro ao Inserir usuario <br>" . $e . '<br>';
         }
     }
-    //teste
-    // public function login($postResult){
 
-    // $this->setEmail($postResult['email']);
-    // $this->setUserPassword($postResult['password']);
-
-    // $result = $this->read();
-    
-    // if ($result) {
-    //     $_SESSION['logged'] = true ;
-    //     header("Location: ../../frontend/page/cadastros?page=1");
-    //     die();
-    // }else {
-    //     $_SESSION['message'] = "<span style='color: red;'>Erro! usuario ou senha invalida<br></span>";
-    //     header("Location: ../../frontend/page/login");
-    //     die();
-    // }
-    // }
-    // public function register($postResult){
-    //     $this->setUserName($postResult['userName']);
-    //     $this->setEmail($postResult['email']);
-    //     $this->setUserPassword($postResult['password']);
-    //     $this->setPhoneNumber($postResult['phoneNumber']);
-    //     $this->create();
-        
-    //     header("Location: ../../frontend/page/login");
-    //     die();
-    // }
-    // public function logout(){
-    //     unset($_SESSION['logged']);
-    //     header("Location: ../../frontend/page/login");
-    //     die();
-        
-    // }
 }

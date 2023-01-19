@@ -1,6 +1,5 @@
 <?php
 include_once("../controllers/BooksController.php");
-// include_once("../models/Books.php");
 
 $booksController = new BooksController();
 $booksController->setPost(filter_input_array(INPUT_POST));

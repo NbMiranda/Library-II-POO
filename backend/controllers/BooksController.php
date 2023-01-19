@@ -1,6 +1,5 @@
 <?php
 session_start();
-// require_once("../models/Writers.php");
 require_once("../models/Books.php");
 
 class BooksController {
