@@ -14,7 +14,7 @@ if ($_SESSION['logged']) {
                 <img src="/assets/imgs/library.png" style="margin-bottom: 11px;" alt="Bootstrap" width="30" height="25" style="margin">
                 <span id="orange-text">Biblioteca</span>
             </a>
-            <a class="navbar-brand" href="/frontend/page/writerForm?page=1"><span id="orange-text">Escritores</span></a>
+            <a class="navbar-brand" href="/frontend/page/livros"><span id="orange-text">Livros</span></a>
             <a class="navbar-brand" href="/frontend/page/cadastros?page=1"><span id="orange-text">Cadastros</span></a>
             <!-- <a class="navbar-brand" href="#"><span id="orange-text">asd</span></a> -->
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" style="border: none;" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
@@ -28,7 +28,7 @@ if ($_SESSION['logged']) {
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#"><span id="orange-text">Livros</span></a>
+                            <a class="nav-link active" aria-current="page" href="/frontend/page/writerForm?page=1"><span id="orange-text">Escritores</span></a>
                         </li>
                         <li class="nav-item">
                             <form action="/backend/operations/userOperation.php" method="post">

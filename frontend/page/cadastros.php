@@ -40,7 +40,7 @@ if (!$_SESSION['logged']) {
 
     <!-- register form -->
     <div class="container">
-        <form action="../../backend/operations/booksOperation.php" method="post">
+        <form action="../../backend/operations/booksOperation.php" method="post" enctype="multipart/form-data">
             <div class="row" id="orange-text">
                 <div class="col-6" id="forms">
                     <div class="form-group">
@@ -93,53 +93,39 @@ if (!$_SESSION['logged']) {
                 </div>
             </div>
             <div class="row" id="orange-text">
-                <div class="form-group col-6" id="forms">
+                <div class="form-group col-9" id="forms">
                     <label for="textarea" id="orange-text">Sinopse</label>
-                    <textarea class="form-control" name="sinopse" id="textarea" cols="20" rows="14"></textarea>
+                    <textarea class="form-control" name="sinopse" id="textarea" cols="20" rows="13"></textarea>
                 </div>
-                <div class="form-group col-6" id="forms">
+                <div class="form-group col-3" id="forms">
                     <label class="form-label" for="customFile">Capa do Livro</label>
-                    <input type="file" class="form-control" id="customFile" />
+                    <input type="file" class="form-control" id="customFile" name="image" accept="image/*"/>
                     <!-- <input type="file" id="customFile" /> -->
-                    <div id="display" style="border: 1px solid red;width: 30.4em;height: 15em;display: inline-flex;flex-direction: row;">
+                    <div id="display" style="">
                         
                     </div>
                 </div>
                 <style>
                     #display{
+                        background-image: url(/assets/imgs/bookCover.png);
                         background-position: center;
                         background-size: contain;
                         background-repeat: no-repeat;
+                        width: 9.5em;
+                        height: 13.4em;
+                        /* border: 1px solid #ee9b014f; */
+                        border-radius: 10px;
+                        margin-left: 2.375em;
+                        margin-top: .3em;
+                        /* display: inline-flex;
+                        flex-direction: row; */
+                        /* display: flex;
+                        justify-content: center;
+                        align-items: center; */
                     }
                 </style>
-                <script>
-                    const customFile = document.querySelector("#customFile");
-                    var uploadedImage = "";
-
-                    customFile.addEventListener("change", function(){
-                        const reader = new FileReader();
-                        reader.addEventListener("load", () => {
-                            uploadedImage = reader.result;
-                            document.querySelector("#display").style.backgroundImage = `url(${uploadedImage})`;
-                        });
-                        reader.readAsDataURL(this.files[0]);
-                    })
-                </script>
 
             </div>
-            <!-- <div class="row">
-                <div class="form-group col-6" id="forms">
-                    <label class="form-label" for="customFile">Capa do Livro</label>
-                    <input type="file" class="form-control" id="customFile" />
-                    
-                </div>
-                <div class="form-group col-6" id="forms">
-                    <div id="display" style="border: 1px solid red; width: 300px; height: 300px; display: flex;">
-                        Imagem </br>
-                        <img src="/assets/imgs/hp1.jpg" alt="">
-                    </div>
-                </div>
-            </div> -->
             <button type="submit" name="register" class="btn btn-light" id="forms">Cadastrar</button>
         </form>
     </div>
@@ -228,5 +214,5 @@ if (!$_SESSION['logged']) {
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/src/script.js"></script>
+    <script type="text/javascript" src="/src/app.js"></script>
 </body>

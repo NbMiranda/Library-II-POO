@@ -37,7 +37,7 @@ $books->setInputPost(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
                 echo $booksResult[0]['book_name'];
                 ?>
             </i> </h2>
-        <form action="../../backend/operations/booksOperation.php" method="post">
+        <form action="../../backend/operations/booksOperation.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="bookEditId" value="<?php echo $booksResult[0]['id'] ?>">
             <div class="row" id="orange-text">
 
@@ -102,12 +102,43 @@ $books->setInputPost(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
                 </div>
             </div>
             <div class="row" id="orange-text">
-                <div class="form-group col-12" id="forms">
+                <div class="form-group col-9" id="forms">
                     <label for="textarea" id="orange-text">Sinopse</label>
                     <textarea class="form-control" name="sinopse" id="textarea" cols="20"
-                        rows="6"><?php echo $booksResult[0]['sinopse'] ?></textarea>
+                        rows="13"><?php echo $booksResult[0]['sinopse'] ?></textarea>
+                </div>
+                <div class="form-group col-3" id="forms">
+                    <label class="form-label" for="EditFile">Capa do Livro</label>
+                    <input type="file" class="form-control" id="EditFile" name="image" accept="image/*"/>
+                    <!-- <input type="file" id="customFile" /> -->
+                    <?php
+                    $coverUrl = $booksResult[0]['book_cover'];
+                    echo" 
+                    <div id='Editdisplay' style='background-image: url(/assets/imgs/BookCover/$coverUrl)'>
+                        
+                    </div>";
+                    ?>
                 </div>
             </div>
+            <style>
+                    #Editdisplay{
+                        /* background-image: url(/assets/imgs/bookCover.png); */
+                        background-position: center;
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        width: 9.5em;
+                        height: 13.4em;
+                        /* border: 1px solid #ee9b014f; */
+                        border-radius: 10px;
+                        margin-left: 2.375em;
+                        margin-top: .3em;
+                        /* display: inline-flex;
+                        flex-direction: row; */
+                        /* display: flex;
+                        justify-content: center;
+                        align-items: center; */
+                    }
+                </style>
             <!-- edit -->
             <div class="row text-center" style="margin: 1.5em;">
                 <div class="col-12">
@@ -162,4 +193,6 @@ $books->setInputPost(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
         crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/src/src.js"></script>
+
 </body>

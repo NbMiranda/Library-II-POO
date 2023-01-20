@@ -8,6 +8,7 @@ class Books extends Connect {
     protected $sinopse;
     protected $otherGenre;
     protected $writerName;
+    public $bookCover;
 
     protected $page;
     protected $inputPost;
@@ -46,6 +47,9 @@ class Books extends Connect {
     public function setPage($pageCurrent){
         $this->page = $pageCurrent;
     }
+    public function setBookCover($img){
+        $this->bookCover = $img;
+    }
     //Getters    
     public function getId(){
         return $this->id;
@@ -75,6 +79,9 @@ class Books extends Connect {
     public function getPage(){
         return $this->page;
     }
+    public function getBookCover(){
+        return $this->bookCover;
+    }
     //Metodos (CRUD)
     public function pagination(){
         $page = (!empty($this->getPage())) ? $this->getPage() : 1;
@@ -103,8 +110,8 @@ class Books extends Connect {
     public function create(Books $books){
         try {
             $sql = "INSERT INTO books (                   
-                  book_name, genre, writer_id, sinopse, other_genre) 
-                  VALUES (:bookName, :genre, :writerId, :sinopse, :otherGenre )";
+                  book_name, genre, writer_id, sinopse, other_genre, book_cover) 
+                  VALUES (:bookName, :genre, :writerId, :sinopse, :otherGenre, :bookCover )";
 
             $booksResult = $this->getConnection()->prepare($sql);
             $booksResult->bindValue(":bookName", $books->getBookName());
@@ -112,6 +119,7 @@ class Books extends Connect {
             $booksResult->bindValue(":writerId", $books->getWriterId());
             $booksResult->bindValue(":sinopse", $books->getSinopse());
             $booksResult->bindValue(":otherGenre", $books->getOtherGenre());
+            $booksResult->bindValue(":bookCover", $books->getBookCover());
             
             return $booksResult->execute();
         } catch (Exception $e) {
@@ -120,8 +128,8 @@ class Books extends Connect {
     }
     public function read(){
         try {
-            $sql = "SELECT b.id, b.book_name, b.genre, b.other_genre, b.sinopse, w.writer_name 
-                FROM books as b, writers as w WHERE w.id = b.writer_id ORDER BY book_name asc ";
+            $sql = "SELECT b.id, b.book_name, b.genre, b.other_genre, b.sinopse, b.book_cover, 
+            w.writer_name FROM books as b, writers as w WHERE w.id = b.writer_id ORDER BY book_name ASC";
 
             $result = $this->getConnection()->query($sql);
             $lista = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -137,8 +145,8 @@ class Books extends Connect {
     public function update(Books $books){
         try {
             $sql = "UPDATE books SET book_name=:bookName, genre=:genre, 
-            other_genre=:otherGenre, sinopse=:sinopse, writer_id=:writerId 
-            WHERE id=:id";
+            other_genre=:otherGenre, sinopse=:sinopse, writer_id=:writerId, 
+            book_cover=:bookCover WHERE id=:id";
 
             $booksResult = $this->getConnection()->prepare($sql);
             $booksResult->bindValue(":bookName", $books->getBookName());
@@ -146,7 +154,9 @@ class Books extends Connect {
             $booksResult->bindValue(":otherGenre", $books->getOtherGenre());
             $booksResult->bindValue(":sinopse", $books->getSinopse());
             $booksResult->bindValue(":writerId", $books->getWriterId());
+            $booksResult->bindValue(":bookCover", $books->getBookCover());
             $booksResult->bindValue(":id", $books->getId());
+            
             return $booksResult->execute();
         } catch (Exception $e) {
             echo "Ocorreu um erro ao tentar fazer Update do livro<br> $e <br>";
@@ -169,6 +179,7 @@ class Books extends Connect {
         $books->setGenre($row['genre']);
         $books->setOtherGenre($row['other_genre']);
         $books->setSinopse($row['sinopse']);
+        $books->setBookCover($row['book_cover']);
         $books->setWriterId($row['writer_id']);
         $books->setWriterName($row['writer_name']);
 

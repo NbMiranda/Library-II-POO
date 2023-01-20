@@ -5,9 +5,11 @@ $booksController = new BooksController();
 $booksController->setPost(filter_input_array(INPUT_POST));
 
 if(isset($_POST['register'])){
+    $booksController->setImg($_FILES);
     $booksController->register();
 } 
 elseif (isset($_POST['edit'])) {
+    $booksController->setImg($_FILES);
     $booksController->edit();
 }
 elseif (isset($_POST['delete'])) {
