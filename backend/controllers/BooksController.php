@@ -22,12 +22,14 @@ class BooksController {
     }
     //Metodos
     public function register(){
+        $cover = "sfoto.jpg";
+
         //getting the uploaded FILE post
-        $img = $this->getImg();
-         
-        if (isset($img['image']) && !empty($img['image'])) {
+        $img = $this->getImg(); 
+        if (isset($img['image']['name']) && !empty($img['image']['name'])) {
             $target = $_SERVER['DOCUMENT_ROOT']."/assets/imgs/BookCover/".basename($img['image']['name']);
             move_uploaded_file($img['image']['tmp_name'], $target);
+            $cover = $img['image']['name'];
         }
         //setting
         $books = new Books;
@@ -39,7 +41,8 @@ class BooksController {
         $books->setOtherGenre($postResult['otherGenre']);
         $books->setSinopse($postResult['sinopse']);
 
-        $books->setBookCover($img['image']['name']);
+        $books->setBookCover($cover);
+        // $books->setBookCover($img['image']['name']);
         $books->create($books);
         $_SESSION['msg'] = "<p id='book_success' class='container'>Livro cadastrado com sucesso</p>";
         header("Location: ../../frontend/page/cadastros?page=1");
@@ -47,14 +50,6 @@ class BooksController {
         
     }
     public function edit(){
-        //getting the uploaded FILE post
-        $img = $this->getImg();
-    
-        if (isset($img['image']) && !empty($img['image'])) {
-            $target = $_SERVER['DOCUMENT_ROOT']."/assets/imgs/BookCover/".basename($img['image']['name']);
-            move_uploaded_file($img['image']['tmp_name'], $target);
-        }
-        //setting
         $books = new Books;
         $postResult = $this->getPost();
 
@@ -64,8 +59,26 @@ class BooksController {
         $books->setGenre($postResult['genre']);
         $books->setOtherGenre($postResult['otherGenre']);
         $books->setSinopse($postResult['sinopse']);
-        $books->setBookCover($img['image']['name']);
         $books->update($books);
+    
+        $_SESSION['msg'] = "<p id='book_success' class='container'>Livro editado com sucesso</p>";
+        header("Location: ../../frontend/page/cadastros?page=1");
+        die();
+    }
+    public function editBookCover(){
+        //getting the uploaded FILE post
+        $img = $this->getImg();
+    
+        if (isset($img['image']['name']) && !empty($img['image']['name'])) {
+            $target = $_SERVER['DOCUMENT_ROOT']."/assets/imgs/BookCover/".basename($img['image']['name']);
+            move_uploaded_file($img['image']['tmp_name'], $target);
+        }
+        $books = new Books;
+        $postResult = $this->getPost();
+        $books->setId($postResult['bookEditId']);
+        $books->setBookCover($img['image']['name']);
+        
+        $books->updateCover($books);
     
         $_SESSION['msg'] = "<p id='book_success' class='container'>Livro editado com sucesso</p>";
         header("Location: ../../frontend/page/cadastros?page=1");

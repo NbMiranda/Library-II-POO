@@ -9,11 +9,14 @@ if(isset($_POST['register'])){
     $booksController->register();
 } 
 elseif (isset($_POST['edit'])) {
-    $booksController->setImg($_FILES);
     $booksController->edit();
 }
 elseif (isset($_POST['delete'])) {
     $booksController->delete();
+}
+elseif (isset($_POST['editBookCover'])) {
+    $booksController->setImg($_FILES);
+    $booksController->editBookCover();
 }
 else {
     $resultSearch = $booksController->searchBook(filter_input(INPUT_POST, 'palavra', FILTER_SANITIZE_STRING));

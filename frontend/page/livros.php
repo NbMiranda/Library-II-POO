@@ -92,7 +92,7 @@ $writers = new Writers();
                             
                         </div>
                         <div>
-                            <p class='text-center'><b>Escritor: <span style='color:orange;'>
+                            <p class='text-center' style='margin-top:.5em;'><b>Escritor: <span style='color:orange;'>
                             $writer_name</span></b>
                             </p>
                             <p class='container text-center'><b>Generos:</b> $genre,  $other_genre</p>

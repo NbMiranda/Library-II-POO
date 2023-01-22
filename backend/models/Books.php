@@ -145,8 +145,8 @@ class Books extends Connect {
     public function update(Books $books){
         try {
             $sql = "UPDATE books SET book_name=:bookName, genre=:genre, 
-            other_genre=:otherGenre, sinopse=:sinopse, writer_id=:writerId, 
-            book_cover=:bookCover WHERE id=:id";
+            other_genre=:otherGenre, sinopse=:sinopse, writer_id=:writerId
+            WHERE id=:id";
 
             $booksResult = $this->getConnection()->prepare($sql);
             $booksResult->bindValue(":bookName", $books->getBookName());
@@ -154,7 +154,6 @@ class Books extends Connect {
             $booksResult->bindValue(":otherGenre", $books->getOtherGenre());
             $booksResult->bindValue(":sinopse", $books->getSinopse());
             $booksResult->bindValue(":writerId", $books->getWriterId());
-            $booksResult->bindValue(":bookCover", $books->getBookCover());
             $booksResult->bindValue(":id", $books->getId());
             
             return $booksResult->execute();
@@ -185,6 +184,20 @@ class Books extends Connect {
 
         return $books;
     }
+    public function updateCover(Books $books){
+        try {
+            $sql = "UPDATE books SET book_cover=:bookCover WHERE id=:id";
+
+            $booksResult = $this->getConnection()->prepare($sql);
+            $booksResult->bindValue(":bookCover", $books->getBookCover());
+            $booksResult->bindValue(":id", $books->getId());
+            
+            return $booksResult->execute();
+        } catch (Exception $e) {
+            echo "Ocorreu um erro ao tentar fazer Update da capa livro<br> $e <br>";
+        }
+    }
+    
     public function readLimit(){
         try {
             $start = $this->pagination();

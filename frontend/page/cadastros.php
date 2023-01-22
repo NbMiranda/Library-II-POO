@@ -101,7 +101,7 @@ if (!$_SESSION['logged']) {
                     <label class="form-label" for="customFile">Capa do Livro</label>
                     <input type="file" class="form-control" id="customFile" name="image" accept="image/*"/>
                     <!-- <input type="file" id="customFile" /> -->
-                    <div id="display" style="">
+                    <div id="display">
                         
                     </div>
                 </div>

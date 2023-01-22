@@ -108,20 +108,53 @@ $books->setInputPost(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
                         rows="13"><?php echo $booksResult[0]['sinopse'] ?></textarea>
                 </div>
                 <div class="form-group col-3" id="forms">
-                    <label class="form-label" for="EditFile">Capa do Livro</label>
-                    <input type="file" class="form-control" id="EditFile" name="image" accept="image/*"/>
-                    <!-- <input type="file" id="customFile" /> -->
                     <?php
                     $coverUrl = $booksResult[0]['book_cover'];
-                    echo" 
-                    <div id='Editdisplay' style='background-image: url(/assets/imgs/BookCover/$coverUrl)'>
+                    echo " 
+                    <div id='bookCoverDisplay' 
+                    style='background-image: url(/assets/imgs/BookCover/$coverUrl);
+                    margin-top:1.2em;'>
                         
                     </div>";
                     ?>
+                    <!-- Edit book cover Modal -->
+                    <form action="../../backend/operations/booksOperation.php" method="post" enctype="multipart/form-data">
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-lg btn-outline-warning btn-block" id="writerButton" 
+                        data-bs-toggle="modal" data-bs-target="#bookCover" style="margin-top:1em; margin-left:5.3em;">
+                            Trocar Capa
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="bookCover" tabindex="-1" aria-labelledby="bookCoverLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="bookCoverLabel">Editar Capa do livro</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <label class="form-label" for="EditFile">Capa do Livro</label>
+                                        <input type="file" class="form-control" id="EditFile" name="image" accept="image/*"/>
+                                        <div id='Editdisplay' 
+                                        style='margin-top:1.6em; margin-left: 6.2em;'>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                        <button type="submit" class="btn btn-primary" name="editBookCover">Editar capa</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
+
             </div>
             <style>
-                    #Editdisplay{
+                    #Editdisplay, #bookCoverDisplay{
                         /* background-image: url(/assets/imgs/bookCover.png); */
                         background-position: center;
                         background-size: contain;
@@ -137,6 +170,10 @@ $books->setInputPost(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
                         /* display: flex;
                         justify-content: center;
                         align-items: center; */
+                        
+                    }
+                    #bookCover{
+                        color: #000;
                     }
                 </style>
             <!-- edit -->
