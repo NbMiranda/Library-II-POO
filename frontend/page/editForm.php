@@ -17,7 +17,7 @@ if (!$_SESSION['logged']) {
     <title>Editar</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="stylesheet" href="/assets/app.css">
     <link rel="shortcut icon" href="/assets/imgs/library.png" type="image/x-icon">
 </head>
 <?php
@@ -41,14 +41,14 @@ $books->setInputPost(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
             <input type="hidden" name="bookEditId" value="<?php echo $booksResult[0]['id'] ?>">
             <div class="row" id="orange-text">
 
-                <div class="col-6" id="forms">
+                <div class="col-md-6 col-sm-12" id="forms">
                     <div class="form-group">
                         <label for="bookName">Nome do Livro</label>
                         <input type="text" class="form-control" value="<?php echo $booksResult[0]['book_name'] ?>"
                             name="bookName" required>
                     </div>
                 </div>
-                <div class="col-4" id="forms">
+                <div class="col-md-4 col-sm-8" id="forms">
                     <div class="form-group">
                         <label for="writer-name">Nome do escritor</label>
                         <select class="form-select" aria-label="Default select example" name="writerId" required
@@ -69,14 +69,14 @@ $books->setInputPost(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
                         </select>
                     </div>
                 </div>
-                <div class="col-2">
+                <div class="col-md-2 col-sm-4">
                     <br> <br>
                     <a href="writerForm?page=1" class="btn btn-outline-warning"
                      id="writerButton" style="margin-top:-1.2em;">Novo escritor</a>
                 </div>
             </div>
             <div class="row" id="orange-text">
-                <div class="col-6" id="forms">
+                <div class="col-md-6 col-sm-12" id="forms">
                     <div class="form-group">
                         <label for="">Genero</label>
                         <select class="form-select" aria-label="Default select example" name="genre" required>
@@ -93,7 +93,7 @@ $books->setInputPost(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
                         </select>
                     </div>
                 </div>
-                <div class="col-6" id="forms">
+                <div class="col-md-6 col-sm-12" id="forms">
                     <div class="form-group">
                         <label for="otherGenre">Gêneros secundarios</label>
                         <input type="text" minlength="2" maxlength="50" class="form-control" 
@@ -102,12 +102,12 @@ $books->setInputPost(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
                 </div>
             </div>
             <div class="row" id="orange-text">
-                <div class="form-group col-9" id="forms">
+                <div class="form-group col-md-6 col-lg-9 col-sm-12" id="forms">
                     <label for="textarea" id="orange-text">Sinopse</label>
                     <textarea class="form-control" name="sinopse" id="textarea" cols="20"
                         rows="13"><?php echo $booksResult[0]['sinopse'] ?></textarea>
                 </div>
-                <div class="form-group col-3" id="forms">
+                <div class="form-group col-md-6 col-lg-3 col-sm-12" id="forms">
                     <?php
                     $coverUrl = $booksResult[0]['book_cover'];
                     echo " 
@@ -153,7 +153,7 @@ $books->setInputPost(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
                 </div>
 
             </div>
-            <style>
+            <!-- <style>
                     #Editdisplay, #bookCoverDisplay{
                         /* background-image: url(/assets/imgs/bookCover.png); */
                         background-position: center;
@@ -175,7 +175,7 @@ $books->setInputPost(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
                     #bookCover{
                         color: #000;
                     }
-                </style>
+                </style> -->
             <!-- edit -->
             <div class="row text-center" style="margin: 1.5em;">
                 <div class="col-12">

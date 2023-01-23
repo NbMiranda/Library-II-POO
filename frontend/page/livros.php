@@ -18,10 +18,10 @@ $writers = new Writers();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastros</title>
+    <title>Livros</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="stylesheet" href="/assets/app.css">
     <link rel="shortcut icon" href="/assets/imgs/library.png" type="image/x-icon">
 </head>
 
@@ -30,9 +30,14 @@ $writers = new Writers();
     include_once("../components/header.php");
     ?>
     <div class="container book_background">
-        <h1 class="text-center" id="orange-text">Livros</h1>
+        <h1 class="text-center" id="livrosTitle">Livros</h1>
     </div>
-    <style>
+    <!-- <style>
+        #livrosTitle{
+            color: orange;
+            background-color: #00000094;
+            border-radius: 6px;
+        }
         .book_background{
             background-color: #8F8F8F;
             width: auto;
@@ -42,7 +47,7 @@ $writers = new Writers();
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 2em;
+            /* margin-bottom: 2em; */
         }
         .book_background h1{
             font-weight: 800;
@@ -72,8 +77,10 @@ $writers = new Writers();
         #book-content p {
             margin-bottom: .8em;
         }
-    </style>
+    </style> -->
     <section class="container">
+        <?php require_once('../components/carousel.php');?>
+        <h2 class="text-center" style="margin: 3em 0 1.5em 0 ;">Todos os Livros</h2>
         <div class='row'>
             <?php
             foreach ($books->read() as $key) {

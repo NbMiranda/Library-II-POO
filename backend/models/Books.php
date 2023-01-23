@@ -253,7 +253,8 @@ class Books extends Connect {
     }
     public function readLastNine(){
         try {
-            $sql = "SELECT * FROM books ORDER BY ID DESC LIMIT 9";
+            $sql = "SELECT b.id, b.book_name, b.genre, b.other_genre, b.sinopse, b.book_cover, 
+            w.writer_name FROM books as b, writers as w WHERE w.id = b.writer_id ORDER BY ID DESC LIMIT 9";
             $result = $this->getConnection()->query($sql);
             $lista = $result->fetchAll(PDO::FETCH_ASSOC);
             $booksResult = array();
