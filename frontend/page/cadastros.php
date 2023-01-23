@@ -107,7 +107,7 @@ if (!$_SESSION['logged']) {
                 </div>
                 <style>
                     #display{
-                        background-image: url(/assets/imgs/bookCover.png);
+                        background-image: url(/assets/imgs/example.png);
                         background-position: center;
                         background-size: contain;
                         background-repeat: no-repeat;

@@ -1,5 +1,8 @@
+<?php
+
+?>
 <!-- Harry  -->
- <section id="content">
+<section id="content">
     <div class="container text-center">
         <div class="row">
             <div class="col-sm-0  col-md-0 col-lg-4 col-xl-4 d-flex text-center justify-content-center">
@@ -7,34 +10,34 @@
                 <div id="carouselExampleIndicatorsHarry" class="carousel slide" data-bs-ride="true">
                     <div class="carousel-inner ">
                         <div class="carousel-item active" id="harrycarousel">
-                            <img src="/assets/imgs/hp1.jpg" class="d-block w-100" alt="...">
+                            <img src="/assets/imgs/BookCover/hp1.jpg" class="d-block w-100" alt="...">
                         </div>
                         <div class="book carousel-item">
-                            <img src="/assets/imgs/hp2.jpg" class="d-block w-100" alt="...">
+                            <img src="/assets/imgs/BookCover/hp2.jpg" class="d-block w-100" alt="...">
                         </div>
                         <div class="book carousel-item">
-                            <img src="/assets/imgs/hp3.jpg" class="d-block w-100" alt="...">
+                            <img src="/assets/imgs/BookCover/hp3.jpg" class="d-block w-100" alt="...">
                         </div>
                         <div class="book carousel-item">
-                            <img src="/assets/imgs/hp4.jpg" class="d-block w-100" alt="...">
+                            <img src="/assets/imgs/BookCover/hp4.jpg" class="d-block w-100" alt="...">
                         </div>
                         <div class="book carousel-item">
-                            <img src="/assets/imgs/hp5.jpg" class="d-block w-100" alt="...">
+                            <img src="/assets/imgs/BookCover/hp5.jpg" class="d-block w-100" alt="...">
                         </div>
                         <div class="book carousel-item">
-                            <img src="/assets/imgs/hp6.jpg" class="d-block w-100" alt="...">
+                            <img src="/assets/imgs/BookCover/hp6.jpg" class="d-block w-100" alt="...">
                         </div>
                         <div class="book carousel-item">
-                            <img src="/assets/imgs/hp7.jpg" class="d-block w-100" alt="...">
+                            <img src="/assets/imgs/BookCover/hp7.jpg" class="d-block w-100" alt="...">
                         </div>
                     </div>
-                    <button class="carousel-control-prev" type="button"
-                        data-bs-target="#carouselExampleIndicatorsHarry" data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicatorsHarry"
+                        data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button"
-                        data-bs-target="#carouselExampleIndicatorsHarry" data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicatorsHarry"
+                        data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
@@ -82,19 +85,19 @@
                 <div id="carouselExampleIndicatorsPearcy" class="carousel slide" data-bs-ride="true">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="/assets/imgs/pj11.jpg" class="d-block w-100" alt="...">
+                            <img src="/assets/imgs/BookCover/pj11.jpg" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="/assets/imgs/pj22.jpg" class="d-block w-100" alt="...">
+                            <img src="/assets/imgs/BookCover/pj22.jpg" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="/assets/imgs/pj33.jpg" class="d-block w-100" alt="...">
+                            <img src="/assets/imgs/BookCover/pj33.jpg" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="/assets/imgs/pj44.jpg" class="d-block w-100" alt="...">
+                            <img src="/assets/imgs/BookCover/pj44.jpg" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="/assets/imgs/pj55.jpg" class="d-block w-100" alt="...">
+                            <img src="/assets/imgs/BookCover/pj55.jpg" class="d-block w-100" alt="...">
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button"
@@ -123,31 +126,31 @@
                 <div id="carouselExampleIndicatorsSking" class="carousel slide" data-bs-ride="true">
                     <div class="carousel-inner">
                         <div class="carousel-item active" id="harrycarousel">
-                            <img src="/assets/imgs/sk11.jpg" class="d-block w-100" alt="...">
+                            <img src="/assets/imgs/BookCover/misery.jpg" class="d-block w-100" alt="...">
                         </div>
                         <div class="book carousel-item">
-                            <img src="/assets/imgs/sk22.jpg" class="d-block w-100" alt="...">
+                            <img src="/assets/imgs/BookCover/itacoisa.jpg" class="d-block w-100" alt="...">
                         </div>
                         <div class="book carousel-item">
-                            <img src="/assets/imgs/sk33.jpg" class="d-block w-100" alt="...">
+                            <img src="/assets/imgs/BookCover/outsider.jpg" class="d-block w-100" alt="...">
                         </div>
                         <div class="book carousel-item">
-                            <img src="/assets/imgs/sk44.jpg" class="d-block w-100" alt="...">
+                            <img src="/assets/imgs/BookCover/oiluminado.jpg" class="d-block w-100" alt="...">
                         </div>
                         <div class="book carousel-item">
-                            <img src="/assets/imgs/sk55.jpg" class="d-block w-100" alt="...">
+                            <img src="/assets/imgs/BookCover/carrie.jpg" class="d-block w-100" alt="...">
                         </div>
                         <div class="book carousel-item">
-                            <img src="/assets/imgs/sk66.jpg" class="d-block w-100" alt="...">
+                            <img src="/assets/imgs/BookCover/doutorsono.jpg" class="d-block w-100" alt="...">
                         </div>
                     </div>
-                    <button class="carousel-control-prev" type="button"
-                        data-bs-target="#carouselExampleIndicatorsSking" data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicatorsSking"
+                        data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button"
-                        data-bs-target="#carouselExampleIndicatorsSking" data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicatorsSking"
+                        data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>

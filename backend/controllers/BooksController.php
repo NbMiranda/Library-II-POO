@@ -22,7 +22,7 @@ class BooksController {
     }
     //Metodos
     public function register(){
-        $cover = "sfoto.jpg";
+        $cover = "scapa.jpg";
 
         //getting the uploaded FILE post
         $img = $this->getImg(); 

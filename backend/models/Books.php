@@ -251,4 +251,18 @@ class Books extends Connect {
         }
 
     }
+    public function readLastNine(){
+        try {
+            $sql = "SELECT * FROM books ORDER BY ID DESC LIMIT 9";
+            $result = $this->getConnection()->query($sql);
+            $lista = $result->fetchAll(PDO::FETCH_ASSOC);
+            $booksResult = array();
+            foreach ($lista as $key) {
+                $booksResult[] = $this->selectBooks($key);
+            }
+            return $booksResult;
+        } catch (Exception $e) {
+            echo "Ocorreu um erro ao tentar Buscar Todos." . $e;
+        }
+    }
 }

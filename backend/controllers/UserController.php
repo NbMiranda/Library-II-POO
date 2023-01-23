@@ -20,7 +20,7 @@ class UserController {
         
         if ($result) {
             $_SESSION['logged'] = true ;
-            header("Location: ../../frontend/page/cadastros?page=1");
+            header("Location: ../../frontend/page/livros");
             die();
         }else {
             $_SESSION['message'] = "<span style='color: red;'>Erro! usuario ou senha invalida<br></span>";
