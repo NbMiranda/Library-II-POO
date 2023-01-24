@@ -9,7 +9,7 @@
                 <ul>
                     <br>
                     <li><a href="/frontend/page/cadastros?page=1">Cadastros</a></li>
-                    <li><a href="">Livros</a></li>
+                    <li><a href="/frontend/page/livros">Livros</a></li>
                     <li><a href="">Ajuda</a></li>
                 </ul>
             </div>
