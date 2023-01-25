@@ -146,7 +146,7 @@ if (!$_SESSION['logged']) {
         <!-- Collapse search book -->
         <div class="row ">
             <div class="col-md-4 col-sm-1"></div>
-            <div class="col-md-4 col-sm-10" style="">
+            <div class="col-md-4 col-sm-10">
                 <div class="collapse" id="collapseExample">
                     <div 
                         style="background-color:#141414; font-size: 1.2em; border: none; padding:0;">
