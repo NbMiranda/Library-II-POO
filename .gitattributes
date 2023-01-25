@@ -1,6 +1,11 @@
-*.blade.php diff=html
+* text=auto
+
 *.css diff=css
 *.html diff=html
 *.md diff=markdown
 *.php diff=php
 Dockerfile diif=Dockerfile
+
+/.github export-ignore
+CHANGELOG.md export-ignore
+.styleci.yml export-ignore
