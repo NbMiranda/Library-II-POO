@@ -20,7 +20,7 @@ class BooksController {
     public function getImg(){
         return $this->img;
     }
-    //Metodos
+    //Registra um livro
     public function register(){
         $cover = "scapa.jpg";
 
@@ -49,6 +49,7 @@ class BooksController {
         die();
         
     }
+    //faz o update de um livro
     public function edit(){
         $books = new Books;
         $postResult = $this->getPost();
@@ -65,6 +66,7 @@ class BooksController {
         header("Location: ../../frontend/page/cadastros?page=1");
         die();
     }
+    //Edita a capa de um livro
     public function editBookCover(){
         //getting the uploaded FILE post
         $img = $this->getImg();
@@ -84,6 +86,7 @@ class BooksController {
         header("Location: ../../frontend/page/cadastros?page=1");
         die();
     }
+    //Deleta um livro
     public function delete(){
         $books = new Books;
         $postResult = $this->getPost();
@@ -96,6 +99,7 @@ class BooksController {
         die();
 
     }
+    //busca dinamicamente um livro
     public function searchBook($resultSearch){
         $books = new Books;
         return $books->selectLike($resultSearch);

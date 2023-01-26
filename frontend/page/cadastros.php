@@ -105,25 +105,6 @@ if (!$_SESSION['logged']) {
                         
                     </div>
                 </div>
-                <!-- <style>
-                    #display{
-                        background-image: url(/assets/imgs/example.png);
-                        background-position: center;
-                        background-size: contain;
-                        background-repeat: no-repeat;
-                        width: 9.5em;
-                        height: 13.4em;
-                        /* border: 1px solid #ee9b014f; */
-                        border-radius: 10px;
-                        margin-left: 2.375em;
-                        margin-top: .3em;
-                        /* display: inline-flex;
-                        flex-direction: row; */
-                        /* display: flex;
-                        justify-content: center;
-                        align-items: center; */
-                    }
-                </style> -->
 
             </div>
             <button type="submit" name="register" class="btn btn-light" id="forms">Cadastrar</button>

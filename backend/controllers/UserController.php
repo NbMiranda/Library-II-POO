@@ -9,7 +9,6 @@ class UserController {
     public function getPost(){
         return $this->post;
     }
-
     public function login(){
         $user = new User;
         $postResult = $this->getPost();
