@@ -1,7 +1,6 @@
 <?php
 if ($_SESSION['logged']) {
-    // $_SESSION['btn'] = "<button class='nav-item btn btn-link' type='submit' name='logout'
-    // style='margin-left:-14px; color: orange;'>Logout</button>";
+
     $_SESSION['btn'] = "<button class='nav-item btn btn-link' type='submit' name='logout'
     style='margin-left:-14px text-; color: orange; text-decoration: none;'>Exit
     <svg xmlns='http://www.w3.org/2000/svg' width='20' height='19' fill='currentColor' class='bi bi-box-arrow-left' viewBox='0 0 16 16'>
@@ -9,21 +8,13 @@ if ($_SESSION['logged']) {
       <path fill-rule='evenodd' d='M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z'/>
     </svg> </button>";
     
-//     <button class='nav-item btn btn-link' type='submit' name='logout'
-//     style='margin-left:-14px; color: orange;'>
-//     <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='currentColor' class='bi bi-box-arrow-in-right' viewBox='0 0 16 16'>
-//     <path fill-rule='evenodd' d='M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z'/>
-//     <path fill-rule='evenodd' d='M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z'/>
-//   </svg></button>"
-
 }else {
      $_SESSION['btn'] = "<a href='/frontend/page/login' class='nav-item'>
      <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='currentColor' class='bi bi-box-arrow-in-right' viewBox='0 0 16 16'>
         <path fill-rule='evenodd' d='M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z'/>
         <path fill-rule='evenodd' d='M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z'/>
     </svg> Login</a>";
-    // $_SESSION['btn'] = "<button class='nav-item btn btn-link' href='/frontend/page/login'
-    // >Login</button>";
+
 }
 ?>
 <header id="nav">
